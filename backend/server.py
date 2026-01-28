@@ -541,11 +541,13 @@ async def remove_from_cart(session_id: str, item_index: int):
     # Recalculate
     subtotal = sum(i['base_price'] * i['quantity'] for i in items)
     design_total = sum(i['design_price'] * i['quantity'] for i in items)
-    total = subtotal + design_total
+    shipping = calculate_shipping(subtotal + design_total)
+    total = subtotal + design_total + shipping
     
     cart['items'] = items
     cart['subtotal'] = round(subtotal, 2)
     cart['design_total'] = round(design_total, 2)
+    cart['shipping'] = round(shipping, 2)
     cart['total'] = round(total, 2)
     cart['updated_at'] = datetime.now(timezone.utc).isoformat()
     
