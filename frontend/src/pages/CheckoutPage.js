@@ -358,16 +358,59 @@ export const CheckoutSuccessPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const sessionId = searchParams.get('session_id');
+  const orderId = searchParams.get('order_id');
+  const method = searchParams.get('method');
   const [status, setStatus] = useState('checking');
   const [order, setOrder] = useState(null);
 
-  useState(() => {
-    if (sessionId) {
-      pollStatus();
+  useEffect(() => {
+    if (method === 'vipps' && orderId) {
+      // Poll Vipps payment status
+      pollVippsStatus(orderId);
+    } else if (sessionId) {
+      // Poll Stripe status
+      pollStripeStatus();
     }
-  }, [sessionId]);
+  }, [sessionId, orderId, method]);
 
-  const pollStatus = async (attempts = 0) => {
+  const pollVippsStatus = async (orderId, attempts = 0) => {
+    if (attempts >= 15) {
+      setStatus('timeout');
+      return;
+    }
+
+    try {
+      // Get order to find vipps reference
+      const orderRes = await axios.get(`${API}/orders/${orderId}`);
+      const orderData = orderRes.data;
+      
+      if (orderData.vipps_reference) {
+        const statusRes = await axios.get(`${API}/payments/vipps/${orderData.vipps_reference}/status`);
+        
+        if (statusRes.data.status === 'AUTHORIZED') {
+          // Capture the payment
+          await axios.post(`${API}/payments/vipps/${orderData.vipps_reference}/capture`);
+          setStatus('success');
+          setOrder(orderData);
+        } else if (statusRes.data.status === 'CAPTURED') {
+          setStatus('success');
+          setOrder(orderData);
+        } else if (statusRes.data.status === 'ABORTED' || statusRes.data.status === 'EXPIRED') {
+          setStatus('expired');
+        } else {
+          // Still pending, continue polling
+          setTimeout(() => pollVippsStatus(orderId, attempts + 1), 2000);
+        }
+      } else {
+        setTimeout(() => pollVippsStatus(orderId, attempts + 1), 2000);
+      }
+    } catch (err) {
+      console.error('Vipps status error:', err);
+      setTimeout(() => pollVippsStatus(orderId, attempts + 1), 2000);
+    }
+  };
+
+  const pollStripeStatus = async (attempts = 0) => {
     if (attempts >= 10) {
       setStatus('timeout');
       return;
@@ -378,15 +421,17 @@ export const CheckoutSuccessPage = () => {
       if (res.data.payment_status === 'paid') {
         setStatus('success');
         // Get order details
-        const orderRes = await axios.get(`${API}/orders/number/${res.data.metadata?.order_number}`);
-        setOrder(orderRes.data);
+        if (res.data.metadata?.order_number) {
+          const orderRes = await axios.get(`${API}/orders/number/${res.data.metadata.order_number}`);
+          setOrder(orderRes.data);
+        }
       } else if (res.data.status === 'expired') {
         setStatus('expired');
       } else {
-        setTimeout(() => pollStatus(attempts + 1), 2000);
+        setTimeout(() => pollStripeStatus(attempts + 1), 2000);
       }
     } catch {
-      setTimeout(() => pollStatus(attempts + 1), 2000);
+      setTimeout(() => pollStripeStatus(attempts + 1), 2000);
     }
   };
 
@@ -428,8 +473,8 @@ export const CheckoutSuccessPage = () => {
             <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto">
               <span className="text-3xl">⏰</span>
             </div>
-            <h1 className="mt-6 font-manrope text-2xl font-bold text-slate-900">Betalingen utløp</h1>
-            <p className="mt-2 text-slate-600">Betalingssesjonen har utløpt. Vennligst prøv igjen.</p>
+            <h1 className="mt-6 font-manrope text-2xl font-bold text-slate-900">Betalingen ble avbrutt</h1>
+            <p className="mt-2 text-slate-600">Betalingen ble avbrutt eller utløpte. Vennligst prøv igjen.</p>
             <Button className="mt-8" onClick={() => navigate('/handlekurv')}>
               Tilbake til handlekurven
             </Button>
