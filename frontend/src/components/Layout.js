@@ -172,9 +172,7 @@ export const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="col-span-2 md:col-span-1">
-            <span className="font-manrope font-bold text-xl text-white">
-              Firma<span className="text-blue-400">print</span>
-            </span>
+            <img src="/logo.jpg" alt="Firmaprint.no" className="h-8 w-auto brightness-0 invert" />
             <p className="mt-4 text-sm text-slate-400">
               Profilklær med logo – trykk og brodering, levert raskt til din bedrift.
             </p>
