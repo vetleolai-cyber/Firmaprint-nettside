@@ -790,33 +790,33 @@ async def get_logo(logo_id: str):
 
 # ==================== PRICING ENDPOINT ====================
 
+@api_router.get("/pricing/info")
+async def get_pricing_info():
+    """Get current pricing information"""
+    return {
+        "print_small": PRINT_PRICE_SMALL,
+        "print_large": PRINT_PRICE_LARGE,
+        "embroidery": EMBROIDERY_PRICE,
+        "shipping": SHIPPING_COST,
+        "free_shipping_threshold": FREE_SHIPPING_THRESHOLD,
+        "large_print_areas": LARGE_PRINT_AREAS,
+        "currency": "NOK",
+        "vat_rate": 0.25,
+        "prices_exclude_vat": True
+    }
+
 @api_router.post("/pricing/calculate")
 async def calculate_pricing(
     print_method: str,
-    width_cm: float,
-    height_cm: float,
-    quantity: int,
-    colors: List[str] = [],
-    complexity: str = "normal"
+    print_area: str = "left_chest",
+    quantity: int = 1
 ):
     """Calculate price for design/print"""
-    design = DesignObject(
-        logo_url="",
-        logo_preview="",
-        position_x=0,
-        position_y=0,
-        scale=1,
-        rotation=0,
-        view="front",
-        print_area="chest",
-        print_method=print_method,
-        width_cm=width_cm,
-        height_cm=height_cm,
-        colors=colors,
-        complexity=complexity
-    )
+    if print_method == "embroidery":
+        price_per_item = EMBROIDERY_PRICE
+    else:
+        price_per_item = PRINT_PRICE_LARGE if print_area in LARGE_PRINT_AREAS else PRINT_PRICE_SMALL
     
-    price_per_item = calculate_design_price(design, quantity)
     total_price = price_per_item * quantity
     
     return {
@@ -825,11 +825,253 @@ async def calculate_pricing(
         "quantity": quantity,
         "breakdown": {
             "method": print_method,
-            "area_cm2": round(width_cm * height_cm, 2),
-            "colors": len(colors) if colors else 1,
-            "complexity": complexity
+            "print_area": print_area,
+            "is_large_area": print_area in LARGE_PRINT_AREAS
         }
     }
+
+# ==================== VIPPS PAYMENT ENDPOINTS ====================
+
+import httpx
+import time
+
+# Vipps Token Manager
+class VippsTokenManager:
+    def __init__(self):
+        self.access_token: Optional[str] = None
+        self.token_expires_at: float = 0
+    
+    async def get_access_token(self) -> str:
+        """Get a valid access token, requesting a new one if expired."""
+        current_time = time.time()
+        
+        # Return cached token if still valid (with 60-second buffer)
+        if self.access_token and current_time < (self.token_expires_at - 60):
+            return self.access_token
+        
+        vipps_client_id = os.environ.get('VIPPS_CLIENT_ID')
+        vipps_client_secret = os.environ.get('VIPPS_CLIENT_SECRET')
+        vipps_subscription_key = os.environ.get('VIPPS_SUBSCRIPTION_KEY')
+        vipps_msn = os.environ.get('VIPPS_MSN')
+        vipps_api_url = os.environ.get('VIPPS_API_URL', 'https://apitest.vipps.no')
+        
+        if not all([vipps_client_id, vipps_client_secret, vipps_subscription_key, vipps_msn]):
+            raise HTTPException(status_code=500, detail="Vipps er ikke konfigurert")
+        
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"{vipps_api_url}/accesstoken/get",
+                headers={
+                    "Content-Type": "application/json",
+                    "client_id": vipps_client_id,
+                    "client_secret": vipps_client_secret,
+                    "Ocp-Apim-Subscription-Key": vipps_subscription_key,
+                    "Merchant-Serial-Number": vipps_msn,
+                    "Vipps-System-Name": "Firmaprint",
+                    "Vipps-System-Version": "1.0.0",
+                },
+            )
+            
+            if response.status_code != 200:
+                logger.error(f"Vipps token error: {response.text}")
+                raise HTTPException(status_code=500, detail="Kunne ikke koble til Vipps")
+            
+            token_data = response.json()
+            self.access_token = token_data["access_token"]
+            self.token_expires_at = current_time + token_data["expires_in"]
+            
+            return self.access_token
+
+vipps_token_manager = VippsTokenManager()
+
+class VippsPaymentRequest(BaseModel):
+    order_id: str
+    amount: int  # In øre (NOK * 100)
+    description: str
+    return_url: str
+
+@api_router.post("/payments/vipps/initiate")
+async def initiate_vipps_payment(request: VippsPaymentRequest):
+    """Initiate a Vipps payment"""
+    try:
+        access_token = await vipps_token_manager.get_access_token()
+        vipps_api_url = os.environ.get('VIPPS_API_URL', 'https://apitest.vipps.no')
+        vipps_subscription_key = os.environ.get('VIPPS_SUBSCRIPTION_KEY')
+        vipps_msn = os.environ.get('VIPPS_MSN')
+        
+        # Generate unique reference
+        reference = f"fp-{datetime.now().strftime('%Y%m%d%H%M%S')}-{uuid.uuid4().hex[:8]}"
+        
+        payment_payload = {
+            "amount": {
+                "currency": "NOK",
+                "value": request.amount
+            },
+            "paymentMethod": {
+                "type": "WALLET"
+            },
+            "reference": reference,
+            "returnUrl": request.return_url,
+            "userFlow": "WEB_REDIRECT",
+            "paymentDescription": request.description
+        }
+        
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"{vipps_api_url}/epayment/v1/payments",
+                json=payment_payload,
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {access_token}",
+                    "Ocp-Apim-Subscription-Key": vipps_subscription_key,
+                    "Merchant-Serial-Number": vipps_msn,
+                    "Idempotency-Key": str(uuid.uuid4()),
+                    "Vipps-System-Name": "Firmaprint",
+                    "Vipps-System-Version": "1.0.0",
+                },
+            )
+            
+            if response.status_code != 201:
+                logger.error(f"Vipps payment error: {response.text}")
+                raise HTTPException(status_code=400, detail="Kunne ikke opprette Vipps-betaling")
+            
+            payment_data = response.json()
+            
+            # Store payment info
+            await db.payment_transactions.insert_one({
+                'id': str(uuid.uuid4()),
+                'order_id': request.order_id,
+                'reference': reference,
+                'amount': request.amount,
+                'currency': 'NOK',
+                'payment_method': 'vipps',
+                'payment_status': 'CREATED',
+                'created_at': datetime.now(timezone.utc).isoformat()
+            })
+            
+            return {
+                "redirect_url": payment_data["redirectUrl"],
+                "payment_reference": reference
+            }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Vipps initiation error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/payments/vipps/{reference}/status")
+async def get_vipps_payment_status(reference: str):
+    """Check the status of a Vipps payment"""
+    try:
+        access_token = await vipps_token_manager.get_access_token()
+        vipps_api_url = os.environ.get('VIPPS_API_URL', 'https://apitest.vipps.no')
+        vipps_subscription_key = os.environ.get('VIPPS_SUBSCRIPTION_KEY')
+        vipps_msn = os.environ.get('VIPPS_MSN')
+        
+        async with httpx.AsyncClient() as client:
+            response = await client.get(
+                f"{vipps_api_url}/epayment/v1/payments/{reference}",
+                headers={
+                    "Authorization": f"Bearer {access_token}",
+                    "Ocp-Apim-Subscription-Key": vipps_subscription_key,
+                    "Merchant-Serial-Number": vipps_msn,
+                    "Vipps-System-Name": "Firmaprint",
+                    "Vipps-System-Version": "1.0.0",
+                },
+            )
+            
+            if response.status_code != 200:
+                raise HTTPException(status_code=404, detail="Betaling ikke funnet")
+            
+            payment_data = response.json()
+            
+            # Update payment status in DB
+            await db.payment_transactions.update_one(
+                {'reference': reference},
+                {'$set': {
+                    'payment_status': payment_data["state"],
+                    'updated_at': datetime.now(timezone.utc).isoformat()
+                }}
+            )
+            
+            return {
+                "status": payment_data["state"],
+                "authorized_amount": payment_data.get("aggregate", {}).get("authorizedAmount"),
+                "captured_amount": payment_data.get("aggregate", {}).get("capturedAmount"),
+            }
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Vipps status error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/payments/vipps/{reference}/capture")
+async def capture_vipps_payment(reference: str):
+    """Capture an authorized Vipps payment"""
+    try:
+        # Get payment info
+        payment = await db.payment_transactions.find_one({'reference': reference}, {'_id': 0})
+        if not payment:
+            raise HTTPException(status_code=404, detail="Betaling ikke funnet")
+        
+        access_token = await vipps_token_manager.get_access_token()
+        vipps_api_url = os.environ.get('VIPPS_API_URL', 'https://apitest.vipps.no')
+        vipps_subscription_key = os.environ.get('VIPPS_SUBSCRIPTION_KEY')
+        vipps_msn = os.environ.get('VIPPS_MSN')
+        
+        capture_payload = {
+            "modificationAmount": {
+                "currency": "NOK",
+                "value": payment['amount']
+            }
+        }
+        
+        async with httpx.AsyncClient() as client:
+            response = await client.post(
+                f"{vipps_api_url}/epayment/v1/payments/{reference}/capture",
+                json=capture_payload,
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": f"Bearer {access_token}",
+                    "Ocp-Apim-Subscription-Key": vipps_subscription_key,
+                    "Merchant-Serial-Number": vipps_msn,
+                    "Idempotency-Key": str(uuid.uuid4()),
+                    "Vipps-System-Name": "Firmaprint",
+                    "Vipps-System-Version": "1.0.0",
+                },
+            )
+            
+            if response.status_code != 200:
+                logger.error(f"Vipps capture error: {response.text}")
+                raise HTTPException(status_code=400, detail="Kunne ikke fullføre betaling")
+            
+            capture_data = response.json()
+            
+            # Update payment status
+            await db.payment_transactions.update_one(
+                {'reference': reference},
+                {'$set': {
+                    'payment_status': 'CAPTURED',
+                    'captured_amount': capture_data["aggregate"]["capturedAmount"]["value"],
+                    'updated_at': datetime.now(timezone.utc).isoformat()
+                }}
+            )
+            
+            # Update order status
+            await db.orders.update_one(
+                {'vipps_reference': reference},
+                {'$set': {'payment_status': 'paid', 'status': 'processing'}}
+            )
+            
+            return {"success": True, "captured_amount": capture_data["aggregate"]["capturedAmount"]}
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Vipps capture error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # ==================== SEED DATA ====================
 
