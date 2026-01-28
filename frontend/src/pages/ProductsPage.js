@@ -23,7 +23,7 @@ const categoryNames = {
 
 const printMethods = [
   { id: 'print', label: 'Trykk' },
-  { id: 'embroidery', label: 'Brodyr' },
+  { id: 'embroidery', label: 'Brodering' },
 ];
 
 export const ProductsPage = () => {
@@ -238,7 +238,7 @@ export const ProductsPage = () => {
                           {product.print_methods?.length > 0 && (
                             <div className="absolute top-3 left-3 flex gap-1">
                               {product.print_methods.includes('embroidery') && (
-                                <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">Brodyr</span>
+                                <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded">Brodering</span>
                               )}
                               {product.print_methods.includes('print') && (
                                 <span className="bg-slate-900 text-white text-xs px-2 py-1 rounded">Trykk</span>
