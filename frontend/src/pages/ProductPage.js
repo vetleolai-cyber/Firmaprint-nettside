@@ -52,9 +52,9 @@ export const ProductPage = () => {
   useEffect(() => {
     if (logo && product) {
       calculatePrice();
-      drawCanvas();
     }
-  }, [logo, logoPosition, logoScale, logoRotation, quantity, printMethod, selectedVariant, product]);
+    drawCanvas();
+  }, [logo, logoPosition, logoScale, logoRotation, quantity, printMethod, selectedVariant, product, selectedArea, drawCanvas]);
 
   const fetchProduct = async () => {
     try {
