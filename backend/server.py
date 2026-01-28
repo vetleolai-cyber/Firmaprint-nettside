@@ -158,6 +158,7 @@ class Cart(BaseModel):
     items: List[CartItem] = []
     subtotal: float = 0
     design_total: float = 0
+    shipping: float = 0
     total: float = 0
     updated_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
