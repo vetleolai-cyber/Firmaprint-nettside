@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import { CreditCard, FileText, Truck, Check, Loader2 } from 'lucide-react';
+import { CreditCard, FileText, Truck, Check, Loader2, Smartphone } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
@@ -13,12 +13,19 @@ import { toast } from 'sonner';
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
+// Vipps logo SVG
+const VippsLogo = () => (
+  <svg viewBox="0 0 80 24" className="h-6 w-auto" fill="currentColor">
+    <path d="M13.7 1.5l-6 14.4-5.9-14.4H0l7.5 17h2.5l7.5-17h-3.8zm9.8 0h-3.2v17h3.2v-17zm12.1 0h-6.3v17h3.2v-6.6h3.1c3.6 0 5.9-2.2 5.9-5.2s-2.3-5.2-5.9-5.2zm-.1 7.4h-3v-4.4h3c1.7 0 2.7.9 2.7 2.2s-1 2.2-2.7 2.2zm17.1-7.4h-6.3v17h3.2v-6.6h3.1c3.6 0 5.9-2.2 5.9-5.2s-2.3-5.2-5.9-5.2zm-.1 7.4h-3v-4.4h3c1.7 0 2.7.9 2.7 2.2s-1 2.2-2.7 2.2zm16.3-3.9c-1.7-.5-2.5-.9-2.5-1.7 0-.7.6-1.2 1.7-1.2 1.2 0 2.4.5 3.4 1.3l1.5-2.4c-1.3-1-2.9-1.6-4.8-1.6-3 0-5 1.7-5 4.1 0 2.5 2 3.5 4.2 4.1 1.7.5 2.4.9 2.4 1.7 0 .8-.7 1.3-1.9 1.3-1.4 0-2.9-.6-4-1.6l-1.6 2.4c1.4 1.2 3.4 1.9 5.4 1.9 3.2 0 5.2-1.7 5.2-4.2.1-2.5-1.9-3.5-4-4.1z" fill="#FF5B24"/>
+  </svg>
+);
+
 export const CheckoutPage = () => {
   const navigate = useNavigate();
   const { cart, sessionId, clearCart } = useCart();
   const { user } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState('stripe');
+  const [paymentMethod, setPaymentMethod] = useState('vipps');
   
   const [formData, setFormData] = useState({
     name: user?.name || '',
@@ -30,6 +37,11 @@ export const CheckoutPage = () => {
     email: user?.email || '',
     notes: ''
   });
+
+  // Calculate shipping
+  const subtotalWithDesign = (cart.subtotal || 0) + (cart.design_total || 0);
+  const shipping = subtotalWithDesign >= 2000 ? 0 : 99;
+  const total = subtotalWithDesign + shipping;
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -61,7 +73,7 @@ export const CheckoutPage = () => {
         notes: formData.notes || null
       });
 
-      if (paymentMethod === 'stripe' && res.data.checkout_url) {
+      if ((paymentMethod === 'stripe' || paymentMethod === 'vipps') && res.data.checkout_url) {
         window.location.href = res.data.checkout_url;
       } else {
         // Invoice payment
@@ -193,7 +205,30 @@ export const CheckoutPage = () => {
                   </div>
 
                   <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod} className="space-y-3">
-                    <div className="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:border-blue-300 transition-colors" onClick={() => setPaymentMethod('stripe')}>
+                    {/* Vipps - Primary */}
+                    <div 
+                      className={`flex items-center space-x-3 p-4 border-2 rounded-lg cursor-pointer transition-colors ${paymentMethod === 'vipps' ? 'border-orange-400 bg-orange-50' : 'border-slate-200 hover:border-orange-300'}`} 
+                      onClick={() => setPaymentMethod('vipps')}
+                    >
+                      <RadioGroupItem value="vipps" id="vipps" />
+                      <div className="flex-1">
+                        <Label htmlFor="vipps" className="font-medium cursor-pointer flex items-center gap-2">
+                          <Smartphone className="w-4 h-4" />
+                          Vipps
+                          <span className="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full">Anbefalt</span>
+                        </Label>
+                        <p className="text-sm text-slate-500">Rask og enkel betaling med Vipps-appen</p>
+                      </div>
+                      <div className="w-16 h-8 bg-[#FF5B24] rounded-lg flex items-center justify-center">
+                        <span className="text-white font-bold text-sm">Vipps</span>
+                      </div>
+                    </div>
+
+                    {/* Card payment */}
+                    <div 
+                      className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer transition-colors ${paymentMethod === 'stripe' ? 'border-blue-400 bg-blue-50' : 'border-slate-200 hover:border-blue-300'}`} 
+                      onClick={() => setPaymentMethod('stripe')}
+                    >
                       <RadioGroupItem value="stripe" id="stripe" />
                       <div className="flex-1">
                         <Label htmlFor="stripe" className="font-medium cursor-pointer">Kortbetaling</Label>
@@ -205,7 +240,11 @@ export const CheckoutPage = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center space-x-3 p-4 border rounded-lg cursor-pointer hover:border-blue-300 transition-colors" onClick={() => setPaymentMethod('invoice')}>
+                    {/* Invoice */}
+                    <div 
+                      className={`flex items-center space-x-3 p-4 border rounded-lg cursor-pointer transition-colors ${paymentMethod === 'invoice' ? 'border-slate-400 bg-slate-50' : 'border-slate-200 hover:border-slate-300'}`} 
+                      onClick={() => setPaymentMethod('invoice')}
+                    >
                       <RadioGroupItem value="invoice" id="invoice" />
                       <div className="flex-1">
                         <Label htmlFor="invoice" className="font-medium cursor-pointer">Faktura (bedrift)</Label>
@@ -263,12 +302,19 @@ export const CheckoutPage = () => {
                     )}
                     <div className="flex justify-between">
                       <span className="text-slate-600">Frakt</span>
-                      <span className="text-green-600">{cart.total >= 2000 ? 'Gratis' : '99 kr'}</span>
+                      <span className={shipping === 0 ? "text-green-600 font-medium" : ""}>
+                        {shipping === 0 ? 'Gratis' : `${shipping} kr`}
+                      </span>
                     </div>
+                    {shipping > 0 && subtotalWithDesign < 2000 && (
+                      <p className="text-xs text-slate-500">
+                        Handl for {(2000 - subtotalWithDesign).toFixed(0)} kr mer for gratis frakt!
+                      </p>
+                    )}
                     <hr />
                     <div className="flex justify-between font-bold text-lg pt-2">
                       <span>Totalt</span>
-                      <span data-testid="checkout-total">{(cart.total + (cart.total >= 2000 ? 0 : 99)).toFixed(2)} kr</span>
+                      <span data-testid="checkout-total">{total.toFixed(2)} kr</span>
                     </div>
                     <p className="text-xs text-slate-500">eks. mva</p>
                   </div>
@@ -276,7 +322,7 @@ export const CheckoutPage = () => {
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full mt-6 bg-blue-600 hover:bg-blue-700"
+                    className={`w-full mt-6 ${paymentMethod === 'vipps' ? 'bg-[#FF5B24] hover:bg-[#E5522A]' : 'bg-blue-600 hover:bg-blue-700'}`}
                     disabled={loading}
                     data-testid="place-order-btn"
                   >
@@ -287,7 +333,9 @@ export const CheckoutPage = () => {
                       </>
                     ) : (
                       <>
-                        {paymentMethod === 'stripe' ? 'Betal med kort' : 'Bestill med faktura'}
+                        {paymentMethod === 'vipps' && 'Betal med Vipps'}
+                        {paymentMethod === 'stripe' && 'Betal med kort'}
+                        {paymentMethod === 'invoice' && 'Bestill med faktura'}
                       </>
                     )}
                   </Button>
