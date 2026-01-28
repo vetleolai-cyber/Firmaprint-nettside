@@ -36,7 +36,7 @@ Norsk nettbutikk for profilklær med logo (Firmaprint.no) med fokus på broderin
 - ✅ Quote/contact forms
 - ✅ Logo upload endpoint
 - ✅ Price calculation for print/embroidery
-- ✅ Seed data with 8 products
+- ✅ Seed data with 18 Tracker products (local images)
 
 ### Frontend Pages
 - ✅ Homepage (hero, categories, bestsellers, reviews, CTA)
@@ -59,6 +59,7 @@ Norsk nettbutikk for profilklær med logo (Firmaprint.no) med fokus på broderin
 - ✅ Prisberegning basert på trykk/brodyr
 - ✅ Session-basert handlekurv
 - ✅ Responsive design (mobil-først)
+- ✅ Ekte Tracker produktbilder fra tracker.no (lokalt lagret)
 
 ## Prioritized Backlog
 
