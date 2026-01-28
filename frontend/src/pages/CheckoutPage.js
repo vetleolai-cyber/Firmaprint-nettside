@@ -257,7 +257,7 @@ export const CheckoutPage = () => {
                     </div>
                     {cart.design_total > 0 && (
                       <div className="flex justify-between">
-                        <span className="text-slate-600">Trykk/Brodyr</span>
+                        <span className="text-slate-600">Trykk/Brodering</span>
                         <span>{cart.design_total?.toFixed(2)} kr</span>
                       </div>
                     )}
