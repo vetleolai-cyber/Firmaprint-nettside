@@ -1,6 +1,7 @@
 """
 Seed script for Tracker products
 Based on https://www.tracker.no/ catalog with 10%+ margin pricing
+Print areas adjusted to match actual product images
 """
 
 tracker_products = [
@@ -11,7 +12,7 @@ tracker_products = [
         "description": "Klassisk t-skjorte i 100% bomull. Behagelig og slitesterk med god passform. Ideell for trykk og brodering.",
         "category": "tshirts",
         "brand": "Tracker",
-        "base_price": 119.0,  # Zeproc ~98-105kr, margin ~15%
+        "base_price": 119.0,
         "variants": [
             {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/1010_00-2.jpg"], "stock": {}},
             {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/1010_04.jpg"], "stock": {}},
@@ -21,9 +22,9 @@ tracker_products = [
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 15, "y": 20, "width": 20, "height": 20, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 30, "y": 18, "width": 40, "height": 30, "max_width_cm": 25, "max_height_cm": 20},
-            {"name": "full_back", "name_no": "Rygg", "x": 20, "y": 15, "width": 60, "height": 50, "max_width_cm": 35, "max_height_cm": 40}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 28, "width": 15, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 30, "y": 25, "width": 40, "height": 25, "max_width_cm": 25, "max_height_cm": 20},
+            {"name": "full_back", "name_no": "Rygg", "x": 25, "y": 20, "width": 50, "height": 45, "max_width_cm": 35, "max_height_cm": 40}
         ],
         "materials": ["100% bomull, 150g/m²"],
         "fit": "Regular",
@@ -47,8 +48,8 @@ tracker_products = [
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 15, "y": 20, "width": 18, "height": 18, "max_width_cm": 7, "max_height_cm": 7},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 30, "y": 18, "width": 40, "height": 28, "max_width_cm": 22, "max_height_cm": 18},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 30, "width": 14, "height": 10, "max_width_cm": 7, "max_height_cm": 7},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 32, "y": 28, "width": 36, "height": 22, "max_width_cm": 22, "max_height_cm": 18},
         ],
         "materials": ["100% bomull, 150g/m²"],
         "fit": "Slim fit",
@@ -73,8 +74,8 @@ tracker_products = [
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 15, "y": 20, "width": 20, "height": 20, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 30, "y": 18, "width": 40, "height": 30, "max_width_cm": 25, "max_height_cm": 20},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 28, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 30, "y": 25, "width": 40, "height": 25, "max_width_cm": 25, "max_height_cm": 20},
         ],
         "materials": ["100% polyester, 135g/m²"],
         "fit": "Regular",
@@ -97,8 +98,8 @@ tracker_products = [
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 15, "y": 22, "width": 18, "height": 15, "max_width_cm": 7, "max_height_cm": 6},
-            {"name": "back", "name_no": "Rygg", "x": 25, "y": 20, "width": 50, "height": 35, "max_width_cm": 25, "max_height_cm": 18},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 22, "width": 14, "height": 10, "max_width_cm": 7, "max_height_cm": 6},
+            {"name": "back", "name_no": "Rygg", "x": 28, "y": 30, "width": 44, "height": 30, "max_width_cm": 25, "max_height_cm": 18},
         ],
         "materials": ["100% polyester, 135g/m²"],
         "fit": "Regular",
@@ -125,8 +126,8 @@ tracker_products = [
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 12, "y": 22, "width": 20, "height": 18, "max_width_cm": 8, "max_height_cm": 7},
-            {"name": "sleeve", "name_no": "Erme", "x": 80, "y": 25, "width": 15, "height": 12, "max_width_cm": 5, "max_height_cm": 4}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 35, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 7},
+            {"name": "sleeve", "name_no": "Erme", "x": 12, "y": 32, "width": 12, "height": 10, "max_width_cm": 5, "max_height_cm": 4}
         ],
         "materials": ["100% bomull pique, 210g/m²"],
         "fit": "Classic",
@@ -150,7 +151,7 @@ tracker_products = [
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 12, "y": 22, "width": 20, "height": 18, "max_width_cm": 8, "max_height_cm": 7},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 35, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 7},
         ],
         "materials": ["100% polyester, 150g/m²"],
         "fit": "Regular",
@@ -176,9 +177,9 @@ tracker_products = [
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 15, "y": 22, "width": 18, "height": 18, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 25, "y": 20, "width": 50, "height": 35, "max_width_cm": 30, "max_height_cm": 25},
-            {"name": "full_back", "name_no": "Rygg", "x": 15, "y": 12, "width": 70, "height": 55, "max_width_cm": 40, "max_height_cm": 40}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 28, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 28, "y": 25, "width": 44, "height": 28, "max_width_cm": 30, "max_height_cm": 25},
+            {"name": "full_back", "name_no": "Rygg", "x": 22, "y": 18, "width": 56, "height": 50, "max_width_cm": 40, "max_height_cm": 40}
         ],
         "materials": ["80% bomull, 20% polyester, 280g/m²"],
         "fit": "Regular",
@@ -194,7 +195,7 @@ tracker_products = [
         "description": "Sweatshirt med glidelås i halsen. Praktisk og behagelig for hverdagsbruk.", 
         "category": "hoodies",
         "brand": "Tracker",
-        "base_price": 429.0,  # Zeproc ~374-396kr, margin ~12%
+        "base_price": 429.0,
         "variants": [
             {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/3060_04.jpg"], "stock": {}},
             {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/3060_05.jpg"], "stock": {}},
@@ -202,8 +203,8 @@ tracker_products = [
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 15, "y": 25, "width": 18, "height": 18, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "full_back", "name_no": "Rygg", "x": 15, "y": 12, "width": 70, "height": 55, "max_width_cm": 40, "max_height_cm": 40}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 32, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "full_back", "name_no": "Rygg", "x": 22, "y": 20, "width": 56, "height": 48, "max_width_cm": 40, "max_height_cm": 40}
         ],
         "materials": ["80% bomull, 20% polyester, 280g/m²"],
         "fit": "Regular",
@@ -228,9 +229,9 @@ tracker_products = [
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 15, "y": 28, "width": 18, "height": 18, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 25, "y": 25, "width": 50, "height": 35, "max_width_cm": 30, "max_height_cm": 25},
-            {"name": "full_back", "name_no": "Rygg", "x": 15, "y": 15, "width": 70, "height": 55, "max_width_cm": 40, "max_height_cm": 40}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 38, "width": 14, "height": 10, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 28, "y": 35, "width": 44, "height": 25, "max_width_cm": 30, "max_height_cm": 25},
+            {"name": "full_back", "name_no": "Rygg", "x": 22, "y": 25, "width": 56, "height": 45, "max_width_cm": 40, "max_height_cm": 40}
         ],
         "materials": ["80% bomull, 20% polyester, 280g/m²"],
         "fit": "Regular",
@@ -254,8 +255,8 @@ tracker_products = [
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 15, "y": 28, "width": 18, "height": 18, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "full_back", "name_no": "Rygg", "x": 15, "y": 15, "width": 70, "height": 55, "max_width_cm": 40, "max_height_cm": 40}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 35, "width": 14, "height": 10, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "full_back", "name_no": "Rygg", "x": 22, "y": 22, "width": 56, "height": 48, "max_width_cm": 40, "max_height_cm": 40}
         ],
         "materials": ["80% bomull, 20% polyester, 280g/m²"],
         "fit": "Regular",
@@ -281,7 +282,7 @@ tracker_products = [
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 12, "y": 22, "width": 20, "height": 18, "max_width_cm": 8, "max_height_cm": 7},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 28, "width": 14, "height": 10, "max_width_cm": 8, "max_height_cm": 7},
         ],
         "materials": ["100% polyester fleece, 200g/m²"],
         "fit": "Regular",
@@ -304,7 +305,7 @@ tracker_products = [
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 12, "y": 22, "width": 20, "height": 18, "max_width_cm": 8, "max_height_cm": 7},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 30, "width": 14, "height": 10, "max_width_cm": 8, "max_height_cm": 7},
         ],
         "materials": ["100% polyester strikket fleece, 280g/m²"],
         "fit": "Regular",
@@ -329,9 +330,9 @@ tracker_products = [
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 10, "y": 22, "width": 18, "height": 15, "max_width_cm": 8, "max_height_cm": 6},
-            {"name": "back", "name_no": "Rygg", "x": 20, "y": 12, "width": 60, "height": 45, "max_width_cm": 30, "max_height_cm": 25},
-            {"name": "sleeve", "name_no": "Erme", "x": 82, "y": 30, "width": 12, "height": 15, "max_width_cm": 5, "max_height_cm": 6}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 28, "width": 12, "height": 10, "max_width_cm": 8, "max_height_cm": 6},
+            {"name": "back", "name_no": "Rygg", "x": 25, "y": 22, "width": 50, "height": 40, "max_width_cm": 30, "max_height_cm": 25},
+            {"name": "sleeve", "name_no": "Erme", "x": 8, "y": 35, "width": 10, "height": 12, "max_width_cm": 5, "max_height_cm": 6}
         ],
         "materials": ["94% polyester, 6% elastan"],
         "fit": "Regular",
@@ -347,7 +348,7 @@ tracker_products = [
         "description": "Lett og varm hybrid dunjakke med stretch-sider. Perfekt for aktiv bruk i kaldt vær.",
         "category": "jackets",
         "brand": "Tracker",
-        "base_price": 1549.0,  # Zeproc ~1353-1497kr, margin ~10%
+        "base_price": 1549.0,
         "variants": [
             {"color": "Sort", "color_hex": "#000000", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2023/01/7073_04_f.jpg"], "stock": {}},
             {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2023/01/7073_05_f.jpg"], "stock": {}},
@@ -355,7 +356,7 @@ tracker_products = [
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 10, "y": 22, "width": 18, "height": 12, "max_width_cm": 7, "max_height_cm": 5},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 30, "width": 12, "height": 8, "max_width_cm": 7, "max_height_cm": 5},
         ],
         "materials": ["100% nylon, dun-/fjærfyll"],
         "fit": "Regular",
@@ -378,7 +379,7 @@ tracker_products = [
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 10, "y": 22, "width": 18, "height": 12, "max_width_cm": 7, "max_height_cm": 5},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 28, "width": 12, "height": 8, "max_width_cm": 7, "max_height_cm": 5},
         ],
         "materials": ["100% nylon, dun-/fjærfyll 90/10"],
         "fit": "Regular",
@@ -404,8 +405,7 @@ tracker_products = [
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 25, "y": 30, "width": 50, "height": 30, "max_width_cm": 10, "max_height_cm": 6},
-            {"name": "side", "name_no": "Side", "x": 75, "y": 40, "width": 20, "height": 20, "max_width_cm": 4, "max_height_cm": 4}
+            {"name": "front", "name_no": "Front", "x": 28, "y": 35, "width": 44, "height": 22, "max_width_cm": 10, "max_height_cm": 6},
         ],
         "materials": ["100% bomull"],
         "fit": "Adjustable",
@@ -428,7 +428,7 @@ tracker_products = [
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 25, "y": 25, "width": 50, "height": 25, "max_width_cm": 9, "max_height_cm": 5},
+            {"name": "front", "name_no": "Front", "x": 30, "y": 30, "width": 40, "height": 18, "max_width_cm": 9, "max_height_cm": 5},
         ],
         "materials": ["100% polyester med fleece-fôr"],
         "fit": "S/M, L/XL",
@@ -454,7 +454,7 @@ tracker_products = [
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 30, "y": 35, "width": 40, "height": 25, "max_width_cm": 8, "max_height_cm": 5},
+            {"name": "front", "name_no": "Front", "x": 32, "y": 45, "width": 36, "height": 20, "max_width_cm": 8, "max_height_cm": 5},
         ],
         "materials": ["100% akryl"],
         "fit": "One Size",
@@ -479,8 +479,8 @@ tracker_products = [
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 10, "y": 25, "width": 18, "height": 12, "max_width_cm": 7, "max_height_cm": 5},
-            {"name": "back", "name_no": "Rygg", "x": 20, "y": 15, "width": 60, "height": 40, "max_width_cm": 30, "max_height_cm": 20}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 25, "width": 12, "height": 10, "max_width_cm": 7, "max_height_cm": 5},
+            {"name": "back", "name_no": "Rygg", "x": 25, "y": 28, "width": 50, "height": 35, "max_width_cm": 30, "max_height_cm": 20}
         ],
         "materials": ["100% polyester fleece"],
         "fit": "Regular",
@@ -503,8 +503,8 @@ tracker_products = [
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 10, "y": 25, "width": 18, "height": 15, "max_width_cm": 7, "max_height_cm": 6},
-            {"name": "back", "name_no": "Rygg", "x": 20, "y": 15, "width": 60, "height": 40, "max_width_cm": 30, "max_height_cm": 20}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 20, "width": 14, "height": 12, "max_width_cm": 7, "max_height_cm": 6},
+            {"name": "back", "name_no": "Rygg", "x": 25, "y": 25, "width": 50, "height": 35, "max_width_cm": 30, "max_height_cm": 20}
         ],
         "materials": ["80% bomull, 20% polyester, 280g/m²"],
         "fit": "Regular",
@@ -528,7 +528,7 @@ tracker_products = [
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 30, "y": 30, "width": 40, "height": 20, "max_width_cm": 10, "max_height_cm": 5},
+            {"name": "front", "name_no": "Front", "x": 35, "y": 35, "width": 30, "height": 18, "max_width_cm": 10, "max_height_cm": 5},
         ],
         "materials": ["100% polyester med hardt skall"],
         "fit": "One Size",
@@ -550,7 +550,7 @@ tracker_products = [
         ],
         "print_methods": ["print"],
         "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 25, "y": 25, "width": 50, "height": 30, "max_width_cm": 20, "max_height_cm": 12},
+            {"name": "front", "name_no": "Front", "x": 30, "y": 30, "width": 40, "height": 25, "max_width_cm": 20, "max_height_cm": 12},
         ],
         "materials": ["Vanntett tarpaulin"],
         "fit": "100L",
