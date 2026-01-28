@@ -276,43 +276,37 @@ async def require_user(credentials: HTTPAuthorizationCredentials = Depends(secur
         raise HTTPException(status_code=401, detail="Ikke autorisert")
     return user
 
+# ==================== PRICING CONSTANTS ====================
+# Alle priser eks. mva
+PRINT_PRICE_SMALL = 59.0  # Små trykk (bryst, erme)
+PRINT_PRICE_LARGE = 79.0  # Store trykk (rygg)
+EMBROIDERY_PRICE = 89.0   # Brodering
+SHIPPING_COST = 99.0      # Frakt
+FREE_SHIPPING_THRESHOLD = 2000.0  # Gratis frakt over dette beløpet
+
+# Print areas som regnes som "store"
+LARGE_PRINT_AREAS = ["full_back", "back", "center_chest"]
+
 # ==================== PRICING LOGIC ====================
 
 def calculate_design_price(design: DesignObject, quantity: int) -> float:
-    """Calculate price for design/print based on method, size, and quantity"""
-    base_price = 0
-    area_cm2 = design.width_cm * design.height_cm
+    """Calculate price for design/print based on method and placement"""
     
     if design.print_method == "embroidery":
-        # Embroidery pricing based on complexity and size
-        complexity_multiplier = {"simple": 0.8, "normal": 1.0, "detailed": 1.5}
-        multiplier = complexity_multiplier.get(design.complexity, 1.0)
-        base_price = (area_cm2 * 2.5) * multiplier  # NOK per cm² for embroidery
-        
-        # Setup cost (divided by quantity)
-        setup_cost = 200 / quantity if quantity > 0 else 200
-        base_price += setup_cost
-        
-    else:  # print
-        # Print pricing based on colors and size
-        color_count = len(design.colors) if design.colors else 1
-        base_price = area_cm2 * 1.2 * color_count  # NOK per cm² per color
-        
-        # Setup cost (divided by quantity)
-        setup_cost = 150 / quantity if quantity > 0 else 150
-        base_price += setup_cost
-    
-    # Quantity discount
-    if quantity >= 100:
-        base_price *= 0.6
-    elif quantity >= 50:
-        base_price *= 0.7
-    elif quantity >= 25:
-        base_price *= 0.8
-    elif quantity >= 10:
-        base_price *= 0.9
-    
-    return round(base_price, 2)
+        # Brodering: 89 kr per stk
+        return EMBROIDERY_PRICE
+    else:
+        # Trykk: 59 kr for små, 79 kr for store
+        if design.print_area in LARGE_PRINT_AREAS:
+            return PRINT_PRICE_LARGE
+        else:
+            return PRINT_PRICE_SMALL
+
+def calculate_shipping(subtotal: float) -> float:
+    """Calculate shipping cost - free over 2000 kr"""
+    if subtotal >= FREE_SHIPPING_THRESHOLD:
+        return 0.0
+    return SHIPPING_COST
 
 # ==================== AUTH ENDPOINTS ====================
 
