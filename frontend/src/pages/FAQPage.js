@@ -14,11 +14,11 @@ const faqCategories = [
     questions: [
       {
         q: 'Hvilke filformater aksepterer dere?',
-        a: 'Vi aksepterer PNG, JPG, SVG og PDF. For best resultat anbefaler vi vektorfiler (SVG, AI, EPS, PDF) for brodyr, og høyoppløselige rasterbilder (PNG, JPG med minst 300 DPI) for trykk.'
+        a: 'Vi aksepterer PNG, JPG, SVG og PDF. For best resultat anbefaler vi vektorfiler (SVG, AI, EPS, PDF) for brodering, og høyoppløselige rasterbilder (PNG, JPG med minst 300 DPI) for trykk.'
       },
       {
         q: 'Hva er minimumskrav til oppløsning?',
-        a: 'For trykk anbefaler vi minst 300 DPI i trykkstørrelsen. For brodyr trenger vi vektorgrafikk for best resultat. Bilder under 300 DPI kan se uskarpe eller pikselerte ut.'
+        a: 'For trykk anbefaler vi minst 300 DPI i trykkstørrelsen. For brodering trenger vi vektorgrafikk for best resultat. Bilder under 300 DPI kan se uskarpe eller pikselerte ut.'
       },
       {
         q: 'Kan dere hjelpe med logo-tilpasning?',
@@ -60,7 +60,7 @@ const faqCategories = [
       },
       {
         q: 'Hva gjør jeg hvis størrelsen ikke passer?',
-        a: 'Plagg uten trykk/brodyr kan byttes innen 14 dager. Plagg med dekor kan ikke byttes, så sjekk størrelsen nøye før bestilling.'
+        a: 'Plagg uten trykk/brodering kan byttes innen 14 dager. Plagg med dekor kan ikke byttes, så sjekk størrelsen nøye før bestilling.'
       }
     ]
   },
@@ -74,7 +74,7 @@ const faqCategories = [
         a: 'Vask på 40°C, vreng plagget, unngå tørketrommel på høy varme. Ikke bruk blekemiddel. Følg alltid vaskelappen på plagget.'
       },
       {
-        q: 'Er brodyrte plagg vaskbare?',
+        q: 'Er broderingte plagg vaskbare?',
         a: 'Ja! Brodering er svært holdbart og tåler vanlig maskinvask. Vi anbefaler vask på 40-60°C avhengig av plaggtype.'
       },
       {
@@ -90,7 +90,7 @@ const faqCategories = [
     questions: [
       {
         q: 'Kan dere matche en spesifikk Pantone-farge?',
-        a: 'Ja, vi kan matche Pantone-farger for både trykk og brodyr. Oppgi Pantone-koden i bestillingen, så tilpasser vi fargene.'
+        a: 'Ja, vi kan matche Pantone-farger for både trykk og brodering. Oppgi Pantone-koden i bestillingen, så tilpasser vi fargene.'
       },
       {
         q: 'Hvorfor kan farger se annerledes ut på skjerm vs. plagg?',
@@ -98,7 +98,7 @@ const faqCategories = [
       },
       {
         q: 'Hvor mange farger kan jeg ha i logoen?',
-        a: 'For trykk (digitaltrykk) er antall farger ubegrenset. For brodyr anbefaler vi maks 8-10 farger for best resultat og pris.'
+        a: 'For trykk (digitaltrykk) er antall farger ubegrenset. For brodering anbefaler vi maks 8-10 farger for best resultat og pris.'
       }
     ]
   },
