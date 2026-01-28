@@ -1,7 +1,7 @@
 """
 Seed script for Tracker products
 Based on https://www.tracker.no/ catalog with 10%+ margin pricing
-Using reliable image sources
+Using local product images from tracker.no
 """
 
 tracker_products = [
@@ -14,11 +14,11 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 119.0,
         "variants": [
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600"], "stock": {}},
-            {"color": "Rød", "color_hex": "#DC2626", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600"], "stock": {}},
-            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/1010_tshirt_white.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/1010_original_tshirt_black.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/1010_original_tshirt_black.jpg"], "stock": {}},
+            {"color": "Rød", "color_hex": "#DC2626", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["/images/products/1010_original_tshirt_black.jpg"], "stock": {}},
+            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["/images/products/1010_original_tshirt_black.jpg"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
@@ -42,9 +42,9 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 129.0,
         "variants": [
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["https://images.unsplash.com/photo-1554568218-0f1715e72254?w=600"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["/images/products/1012_slim_t_navy.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["/images/products/1012_slim_t_navy.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["/images/products/1012_slim_t_navy.jpg"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
@@ -67,9 +67,9 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 149.0,
         "variants": [
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=600"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1618517351616-38fb9c5210c6?w=600"], "stock": {}},
-            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["/images/products/1200_cool_dry_white.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["/images/products/1200_cool_dry_white.jpg"], "stock": {}},
+            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["/images/products/1200_cool_dry_blue.jpg"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
@@ -94,10 +94,10 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 229.0,
         "variants": [
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1625910513413-5fc51d87c6c3?w=600"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=600"], "stock": {}},
-            {"color": "Lysblå", "color_hex": "#93C5FD", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/2010_pique_white.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/2010_pique_black.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/2010_pique_black.jpg"], "stock": {}},
+            {"color": "Lysblå", "color_hex": "#93C5FD", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["/images/products/2010_pique_white.jpg"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
@@ -122,9 +122,9 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 329.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1572495532056-8583af1cbae0?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1578681994506-b8f463449011?w=600"], "stock": {}},
-            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3010_sweat_navy.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3010_sweat_navy.jpg"], "stock": {}},
+            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3010_sweat_navy.jpg"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
@@ -148,10 +148,10 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 449.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.pexels.com/photos/7688469/pexels-photo-7688469.jpeg?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600"], "stock": {}},
-            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=600"], "stock": {}},
-            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3065_hood_navy.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3065_hood_navy.jpg"], "stock": {}},
+            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3065_hood_navy.jpg"], "stock": {}},
+            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["/images/products/3065_hood_navy.jpg"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
@@ -175,9 +175,9 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 499.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600"], "stock": {}},
-            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1578681994506-b8f463449011?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3066_hood_jacket.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3066_hood_jacket.jpg"], "stock": {}},
+            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3066_hood_jacket.jpg"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
@@ -202,8 +202,8 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 399.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1614975059251-992f11792f9a?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1578681041175-9717c16b0d7c?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/4020_ultrafleece.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/4020_ultrafleece.jpg"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
@@ -225,8 +225,8 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 549.0,
         "variants": [
-            {"color": "Mørk Grå Melert", "color_hex": "#6B7280", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1517940310602-26535839e6d8?w=600"], "stock": {}},
+            {"color": "Mørk Grå Melert", "color_hex": "#6B7280", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/4040_knitted_fleece.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/4040_knitted_fleece.jpg"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
@@ -243,15 +243,15 @@ tracker_products = [
     
     # ==================== JAKKER ====================
     {
-        "name": "Tracker 5040 Softshell Jacket",
-        "slug": "tracker-5040-softshell-jacket",
+        "name": "Tracker 7085 Active Softshell",
+        "slug": "tracker-7085-active-softshell",
         "description": "3-lags softshell jakke med vannavstøtende overflate og fleece-innside. Vindtett og pustende.",
         "category": "jackets",
         "brand": "Tracker",
         "base_price": 749.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.pexels.com/photos/3763234/pexels-photo-3763234.jpeg?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1544923246-77307dd628b5?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/7085_softshell.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/7085_softshell.jpg"], "stock": {}},
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
@@ -268,15 +268,15 @@ tracker_products = [
         "active": True
     },
     {
-        "name": "Tracker 7050 Lightweight Down Jacket",
-        "slug": "tracker-7050-lightweight-down-jacket",
+        "name": "Tracker 7077 Superlight Down Jacket",
+        "slug": "tracker-7077-superlight-down-jacket",
         "description": "Ultralett dunjakke som kan pakkes i egen lomme. Perfekt som ekstra lag.",
         "category": "jackets",
         "brand": "Tracker",
         "base_price": 1199.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1548883354-94bcfe321cbb?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/7077_superlight_down.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/7077_superlight_down.jpg"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
@@ -290,19 +290,42 @@ tracker_products = [
         "featured": True,
         "active": True
     },
+    {
+        "name": "Tracker 7075 Original Down Jacket",
+        "slug": "tracker-7075-original-down-jacket",
+        "description": "Klassisk dunjakke med god varme og lett vekt. Ideell for kalde dager.",
+        "category": "jackets",
+        "brand": "Tracker",
+        "base_price": 1099.0,
+        "variants": [
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/7075_down_jacket.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/7075_down_jacket.jpg"], "stock": {}},
+        ],
+        "print_methods": ["embroidery"],
+        "print_areas": [
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 25, "width": 14, "height": 10, "max_width_cm": 7, "max_height_cm": 5},
+        ],
+        "materials": ["100% nylon, dun-/fjærfyll 80/20"],
+        "fit": "Regular",
+        "delivery_days": 10,
+        "best_for": ["outdoor", "travel", "casual"],
+        "min_quantity": 1,
+        "featured": False,
+        "active": True
+    },
     
     # ==================== CAPS ====================
     {
-        "name": "Tracker 6000 Original Cap",
-        "slug": "tracker-6000-original-cap",
+        "name": "Tracker 6010 Original Baseball Cap",
+        "slug": "tracker-6010-original-cap",
         "description": "Klassisk 6-panels caps i bomull med børstet innside. Justerbar stropp bak.",
         "category": "caps",
         "brand": "Tracker",
         "base_price": 149.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1534215754734-18e55d13e346?w=600"], "stock": {}},
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["One Size"], "images": ["https://images.pexels.com/photos/12025472/pexels-photo-12025472.jpeg?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["/images/products/6010_cap.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["One Size"], "images": ["/images/products/6010_cap.jpg"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["One Size"], "images": ["/images/products/6010_cap.jpg"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
@@ -317,16 +340,16 @@ tracker_products = [
         "active": True
     },
     {
-        "name": "Tracker 6820 Original Beanie",
-        "slug": "tracker-6820-original-beanie",
+        "name": "Tracker 6150 Original Beanie",
+        "slug": "tracker-6150-original-beanie",
         "description": "Klassisk strikket lue i akryl med dobbel lag for ekstra varme.",
         "category": "caps",
         "brand": "Tracker",
         "base_price": 119.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=600"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1510598969022-c4c6c5d05769?w=600"], "stock": {}},
-            {"color": "Grå", "color_hex": "#6B7280", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1607672632458-9eb56696346b?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["/images/products/6150_beanie.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["One Size"], "images": ["/images/products/6150_beanie.jpg"], "stock": {}},
+            {"color": "Grå", "color_hex": "#6B7280", "sizes": ["One Size"], "images": ["/images/products/6150_beanie.jpg"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
@@ -350,8 +373,8 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 199.0,
         "variants": [
-            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600"], "stock": {}},
-            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1581092162384-8987c1d64926?w=600"], "stock": {}},
+            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/1213_hivis_tshirt.jpg"], "stock": {}},
+            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/1213_hivis_tshirt.jpg"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
@@ -374,8 +397,8 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 649.0,
         "variants": [
-            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600"], "stock": {}},
-            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1581092162384-8987c1d64926?w=600"], "stock": {}},
+            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/4013_hivis_fleece.jpg"], "stock": {}},
+            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/4013_hivis_fleece.jpg"], "stock": {}},
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
@@ -398,8 +421,8 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 449.0,
         "variants": [
-            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600"], "stock": {}},
-            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1581092162384-8987c1d64926?w=600"], "stock": {}},
+            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3013_hivis_crewneck.jpg"], "stock": {}},
+            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["/images/products/3013_hivis_crewneck.jpg"], "stock": {}},
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
@@ -417,25 +440,25 @@ tracker_products = [
     
     # ==================== TILBEHØR ====================
     {
-        "name": "Tracker Tote Bag",
-        "slug": "tracker-tote-bag",
-        "description": "Miljøvennlig bomullsbag med lange håndtak. Ideell for messe og event.",
+        "name": "Tracker Original Duffel Bag",
+        "slug": "tracker-duffel-bag",
+        "description": "Slitesterk duffel bag med stor hovedlomme. Ideell for trening og reise.",
         "category": "accessories",
         "brand": "Tracker",
-        "base_price": 79.0,
+        "base_price": 599.0,
         "variants": [
-            {"color": "Natur", "color_hex": "#F5F5DC", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1597633544424-4da83d50be55?w=600"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1605518215813-6e3c7debd1fc?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["/images/products/9167_duffel_bag.jpg"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["One Size"], "images": ["/images/products/9167_duffel_bag.jpg"], "stock": {}},
         ],
-        "print_methods": ["print"],
+        "print_methods": ["print", "embroidery"],
         "print_areas": [
             {"name": "front", "name_no": "Front", "x": 18, "y": 22, "width": 64, "height": 50, "max_width_cm": 28, "max_height_cm": 30}
         ],
-        "materials": ["100% økologisk bomull"],
+        "materials": ["100% polyester"],
         "fit": "One Size",
         "delivery_days": 5,
-        "best_for": ["event", "promo", "eco"],
-        "min_quantity": 25,
+        "best_for": ["event", "promo", "sport"],
+        "min_quantity": 10,
         "featured": False,
         "active": True
     },
