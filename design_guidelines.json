@@ -1,0 +1,180 @@
+{
+  "identity": {
+    "name": "Firmaprint.no",
+    "persona": "E1 - The Anti-AI Designer",
+    "tone": "Future-forward, Techy but Premium, Professional, Efficient",
+    "audience": "Norwegian Businesses (B2B), Teams, SMEs, Craftsmen",
+    "core_values": ["Quality", "Speed", "Precision", "Trust"]
+  },
+  "typography": {
+    "fonts": {
+      "heading": {
+        "family": "Manrope, sans-serif",
+        "weights": ["600", "700", "800"],
+        "usage": "Headings, Hero Titles, Section Headers"
+      },
+      "body": {
+        "family": "Inter, sans-serif",
+        "weights": ["400", "500"],
+        "usage": "Paragraphs, UI Labels, Inputs"
+      },
+      "mono": {
+        "family": "JetBrains Mono, monospace",
+        "weights": ["400"],
+        "usage": "Order IDs, SKU codes, Technical specs"
+      }
+    },
+    "scale": {
+      "h1": "text-4xl md:text-6xl font-bold tracking-tight leading-none",
+      "h2": "text-3xl md:text-4xl font-bold tracking-tight",
+      "h3": "text-2xl font-semibold tracking-tight",
+      "body_lg": "text-lg leading-relaxed",
+      "body_base": "text-base leading-relaxed",
+      "caption": "text-sm text-muted-foreground"
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "DEFAULT": "#0F172A",
+        "foreground": "#F8FAFC",
+        "description": "Deep Obsidian Navy - Use for primary buttons, headers, strong borders"
+      },
+      "secondary": {
+        "DEFAULT": "#F1F5F9",
+        "foreground": "#0F172A",
+        "description": "Soft Slate Gray - Use for secondary buttons, backgrounds"
+      },
+      "accent": {
+        "DEFAULT": "#2563EB",
+        "foreground": "#FFFFFF",
+        "description": "Electric Cobalt - Use for CTAs, active states, highlights"
+      },
+      "background": {
+        "DEFAULT": "#FFFFFF",
+        "alt": "#F8FAFC",
+        "dark": "#020617"
+      },
+      "text": {
+        "primary": "#020617",
+        "secondary": "#64748B",
+        "muted": "#94A3B8"
+      },
+      "border": {
+        "DEFAULT": "#E2E8F0",
+        "focus": "#2563EB"
+      }
+    },
+    "gradients": {
+      "hero": "bg-gradient-to-br from-slate-50 to-slate-100",
+      "glass": "bg-white/70 backdrop-blur-xl border border-white/20 shadow-sm"
+    }
+  },
+  "layout": {
+    "spacing": {
+      "container_padding": "px-4 md:px-8 lg:px-12",
+      "section_gap": "py-16 md:py-24",
+      "element_gap": "gap-4 md:gap-8"
+    },
+    "grid_systems": {
+      "bento": "grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6",
+      "product_grid": "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10",
+      "customizer": "grid grid-cols-1 lg:grid-cols-12 h-[calc(100vh-4rem)]"
+    },
+    "container": {
+      "max_width": "max-w-7xl mx-auto"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 rounded-md font-medium transition-all shadow-sm hover:shadow-md",
+      "secondary": "bg-secondary text-secondary-foreground hover:bg-secondary/80 h-11 px-8 rounded-md font-medium transition-all",
+      "outline": "border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 px-8 rounded-md transition-all",
+      "ghost": "hover:bg-accent hover:text-accent-foreground h-10 px-4 rounded-md transition-all"
+    },
+    "cards": {
+      "base": "bg-card text-card-foreground rounded-xl border shadow-sm transition-all hover:shadow-md",
+      "product": "group relative bg-white rounded-xl overflow-hidden border border-transparent hover:border-border transition-all"
+    },
+    "inputs": {
+      "base": "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+    },
+    "customizer_ui": {
+      "canvas_area": "lg:col-span-8 bg-slate-50 relative flex items-center justify-center overflow-hidden border-r border-slate-200",
+      "controls_sidebar": "lg:col-span-4 bg-white p-6 overflow-y-auto border-l border-slate-200 shadow-[-4px_0_24px_rgba(0,0,0,0.02)]",
+      "tool_panel": "bg-white/80 backdrop-blur-md border border-slate-200 rounded-lg shadow-sm p-2 flex gap-2 absolute bottom-8 left-1/2 -translate-x-1/2"
+    }
+  },
+  "assets": {
+    "images": {
+      "hero": {
+        "url": "https://images.pexels.com/photos/7688457/pexels-photo-7688457.jpeg",
+        "alt": "Modern corporate team in branded hoodies",
+        "position": "center"
+      },
+      "embroidery_detail": {
+        "url": "https://images.unsplash.com/photo-1657470036063-c7e49da31393?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxlbWJyb2lkZXJ5JTIwbWFjaGluZSUyMGNsb3NlJTIwdXAlMjB0aHJlYWQlMjBkZXRhaWx8ZW58MHx8fHwxNzY5NTg0OTAwfDA&ixlib=rb-4.1.0&q=85",
+        "alt": "Close up of embroidery machine detail"
+      },
+      "categories": {
+        "tshirts": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwyfHxibGFuayUyMHQtc2hpcnQlMjBtb2NrdXAlMjBmbGF0JTIwbGF5JTIwd2hpdGUlMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc2OTU4NDkwMnww&ixlib=rb-4.1.0&q=85",
+        "hoodies": "https://images.pexels.com/photos/7688469/pexels-photo-7688469.jpeg",
+        "caps": "https://images.pexels.com/photos/12025472/pexels-photo-12025472.jpeg",
+        "jackets": "https://images.pexels.com/photos/3763234/pexels-photo-3763234.jpeg"
+      }
+    },
+    "icons": {
+      "library": "lucide-react",
+      "style": "stroke-width={1.5} className='w-5 h-5'"
+    }
+  },
+  "motion": {
+    "transitions": {
+      "default": "transition-all duration-200 ease-in-out",
+      "slow": "transition-all duration-500 ease-out",
+      "hover": "hover:-translate-y-1 hover:shadow-lg"
+    },
+    "micro_interactions": {
+      "button_click": "active:scale-95",
+      "card_hover": "hover:border-primary/20"
+    }
+  },
+  "accessibility": {
+    "rules": [
+      "Ensure 4.5:1 contrast ratio for normal text",
+      "Use semantic HTML (nav, main, section, article)",
+      "All images must have alt text",
+      "Focus states must be visible (ring-2 ring-offset-2)",
+      "Do not rely on color alone for status"
+    ]
+  },
+  "tech_stack": {
+    "frontend": "React (JS), Tailwind CSS, Shadcn UI",
+    "backend": "FastAPI",
+    "database": "MongoDB",
+    "state_management": "React Context / Hooks",
+    "icons": "Lucide React",
+    "notifications": "Sonner"
+  },
+  "universal_guidelines": [
+    "Avoid 'AI Slop': No generic centered layouts, no default blue gradients.",
+    "Use 'Manrope' for all headings to give a tech/premium feel.",
+    "Use 'Inter' for body text for maximum readability.",
+    "Primary Action Color is #0F172A (Navy) or #2563EB (Electric Blue) depending on context.",
+    "Use generous padding (p-8, p-12) to create a premium 'airy' feel.",
+    "Glassmorphism should be subtle (white/70), not muddy gray.",
+    "All interactive elements must have 'data-testid' attributes.",
+    "Use 'sonner' for toast notifications.",
+    "For the Customizer: Prioritize screen real estate for the canvas. Controls should be collapsible or neatly organized in a sidebar.",
+    "Mobile First: Ensure the customizer works on touch screens (pinch to zoom, drag to move)."
+  ],
+  "instructions_to_main_agent": {
+    "step_1": "Install dependencies: `npm install lucide-react sonner clsx tailwind-merge` (or yarn add).",
+    "step_2": "Setup Tailwind theme colors in `tailwind.config.js` to match the palette.",
+    "step_3": "Create the Layout component with a sticky glassmorphism header.",
+    "step_4": "Build the 'Hero' section using the provided image and gradient text.",
+    "step_5": "Implement the 'Product Grid' using the Bento Grid system.",
+    "step_6": "Develop the 'Logo Customizer' using HTML5 Canvas or a library like `react-konva` (if allowed) or raw DOM manipulation.",
+    "step_7": "Ensure all forms (Contact, Checkout) use Shadcn-styled inputs."
+  }
+}
