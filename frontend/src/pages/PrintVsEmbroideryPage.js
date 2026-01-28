@@ -30,7 +30,7 @@ const recommendations = [
   {
     product: 'Hoodies/Gensere',
     recommendation: 'Begge',
-    reason: 'Trykk for store motiver, brodyr for diskret brystlogo.',
+    reason: 'Trykk for store motiver, brodering for diskret brystlogo.',
     icon: '🧥'
   },
   {
@@ -150,7 +150,7 @@ export const PrintVsEmbroideryPage = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <X className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                  <span className="text-slate-500">Mindre holdbart enn brodyr</span>
+                  <span className="text-slate-500">Mindre holdbart enn brodering</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <X className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
