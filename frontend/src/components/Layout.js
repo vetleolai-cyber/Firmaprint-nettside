@@ -32,9 +32,7 @@ export const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2" data-testid="logo-link">
-            <span className="font-manrope font-bold text-xl tracking-tight text-slate-900">
-              Firma<span className="text-blue-600">print</span>
-            </span>
+            <img src="/logo.jpg" alt="Firmaprint.no" className="h-8 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
