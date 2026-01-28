@@ -7,7 +7,7 @@ from datetime import datetime
 import uuid
 
 class FirmaprintAPITester:
-    def __init__(self, base_url="https://norsk-profiltoy.preview.emergentagent.com/api"):
+    def __init__(self, base_url="https://embroid-print.preview.emergentagent.com/api"):
         self.base_url = base_url
         self.token = None
         self.session_id = str(uuid.uuid4())
