@@ -135,12 +135,23 @@ export const CartPage = () => {
                   )}
                   <div className="flex justify-between">
                     <span className="text-slate-600">Frakt</span>
-                    <span className="text-slate-500">Beregnes ved checkout</span>
+                    {(cart.subtotal + (cart.design_total || 0)) >= 2000 ? (
+                      <span className="text-green-600 font-medium">Gratis!</span>
+                    ) : (
+                      <span>99 kr</span>
+                    )}
                   </div>
+                  {(cart.subtotal + (cart.design_total || 0)) < 2000 && (
+                    <p className="text-xs text-blue-600">
+                      Handl for {(2000 - (cart.subtotal + (cart.design_total || 0))).toFixed(0)} kr mer for gratis frakt!
+                    </p>
+                  )}
                   <hr />
                   <div className="flex justify-between font-bold text-lg">
                     <span>Totalt</span>
-                    <span data-testid="cart-total">{cart.total?.toFixed(2)} kr</span>
+                    <span data-testid="cart-total">
+                      {((cart.subtotal || 0) + (cart.design_total || 0) + ((cart.subtotal + (cart.design_total || 0)) >= 2000 ? 0 : 99)).toFixed(2)} kr
+                    </span>
                   </div>
                   <p className="text-xs text-slate-500">eks. mva</p>
                 </div>
