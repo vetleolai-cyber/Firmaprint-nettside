@@ -142,18 +142,38 @@ export const ProductPage = () => {
 
     const ctx = canvas.getContext('2d');
     const variant = product.variants[selectedVariant];
+    const imgUrl = variant?.images?.[0] || 'https://via.placeholder.com/500';
+
+    canvas.width = 500;
+    canvas.height = 500;
+
+    // Fill with a placeholder background first
+    ctx.fillStyle = '#f8fafc';
+    ctx.fillRect(0, 0, 500, 500);
 
     // Load product image
     const productImg = new Image();
     productImg.crossOrigin = 'anonymous';
+    
     productImg.onload = () => {
-      canvas.width = 500;
-      canvas.height = 500;
-
       // Draw product
       ctx.drawImage(productImg, 0, 0, 500, 500);
+      drawOverlays(ctx);
+    };
+    
+    productImg.onerror = () => {
+      // Draw placeholder on error
+      ctx.fillStyle = '#e2e8f0';
+      ctx.fillRect(0, 0, 500, 500);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '16px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Produktbilde', 250, 250);
+      drawOverlays(ctx);
+    };
 
-      // Draw print area overlay
+    // Helper function to draw overlays
+    const drawOverlays = (ctx) => {
       const area = product.print_areas.find(a => a.name === selectedArea);
       if (area) {
         const areaX = (area.x / 100) * 500;
@@ -161,11 +181,17 @@ export const ProductPage = () => {
         const areaW = (area.width / 100) * 500;
         const areaH = (area.height / 100) * 500;
 
+        // Draw print area
         ctx.strokeStyle = '#2563EB';
         ctx.lineWidth = 2;
         ctx.setLineDash([5, 5]);
         ctx.strokeRect(areaX, areaY, areaW, areaH);
         ctx.setLineDash([]);
+
+        // Draw area label
+        ctx.fillStyle = '#2563EB';
+        ctx.font = '12px Inter, sans-serif';
+        ctx.fillText(area.name_no, areaX + 5, areaY - 5);
 
         // Draw logo if exists
         if (logo) {
@@ -182,7 +208,8 @@ export const ProductPage = () => {
         }
       }
     };
-    productImg.src = variant?.images?.[0] || 'https://via.placeholder.com/500';
+
+    productImg.src = imgUrl;
   }, [product, selectedVariant, selectedArea, logo, logoPosition, logoScale, logoRotation]);
 
   const handleCanvasMouseDown = (e) => {
