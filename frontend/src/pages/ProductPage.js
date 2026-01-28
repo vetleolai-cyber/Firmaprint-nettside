@@ -290,6 +290,10 @@ export const ProductPage = () => {
                       alt={product.name}
                       className="w-full h-full object-contain"
                       draggable={false}
+                      onError={(e) => {
+                        // Fallback to placeholder if image fails to load
+                        e.target.src = `https://placehold.co/500x500/f1f5f9/64748b?text=${encodeURIComponent(product.name)}`;
+                      }}
                     />
                     
                     {/* Print Area Overlay */}
