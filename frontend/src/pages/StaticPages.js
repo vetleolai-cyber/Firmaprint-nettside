@@ -74,7 +74,7 @@ export const AboutPage = () => {
             <div className="relative">
               <img
                 src="https://images.unsplash.com/photo-1657470036063-c7e49da31393?w=600"
-                alt="Brodyrmaskin i arbeid"
+                alt="Broderingmaskin i arbeid"
                 className="rounded-2xl shadow-lg"
               />
               <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-4 rounded-xl shadow-lg">
