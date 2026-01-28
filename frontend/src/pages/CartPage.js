@@ -84,7 +84,7 @@ export const CartPage = () => {
                       </p>
                       {item.design && (
                         <p className="text-sm text-blue-600">
-                          {item.design.print_method === 'embroidery' ? 'Brodyr' : 'Trykk'} på {item.design.print_area}
+                          {item.design.print_method === 'embroidery' ? 'Brodering' : 'Trykk'} på {item.design.print_area}
                         </p>
                       )}
                       <div className="flex items-center justify-between mt-3">
@@ -129,7 +129,7 @@ export const CartPage = () => {
                   </div>
                   {cart.design_total > 0 && (
                     <div className="flex justify-between">
-                      <span className="text-slate-600">Trykk/Brodyr</span>
+                      <span className="text-slate-600">Trykk/Brodering</span>
                       <span>{cart.design_total?.toFixed(2)} kr</span>
                     </div>
                   )}
