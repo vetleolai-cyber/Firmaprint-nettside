@@ -505,7 +505,7 @@ export const ProductPage = () => {
                         <div className="flex items-center space-x-2">
                           <RadioGroupItem value="embroidery" id="embroidery" />
                           <Label htmlFor="embroidery" className="font-normal cursor-pointer">
-                            Brodyr – Premium og holdbart
+                            Brodering – Premium og holdbart
                           </Label>
                         </div>
                       )}
@@ -552,7 +552,7 @@ export const ProductPage = () => {
                     </div>
                     {logo && (
                       <div className="flex justify-between text-sm">
-                        <span className="text-slate-600">{printMethod === 'embroidery' ? 'Brodyr' : 'Trykk'} ({quantity} stk)</span>
+                        <span className="text-slate-600">{printMethod === 'embroidery' ? 'Brodering' : 'Trykk'} ({quantity} stk)</span>
                         <span>{(designPrice * quantity).toFixed(2)} kr</span>
                       </div>
                     )}
