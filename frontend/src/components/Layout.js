@@ -62,7 +62,7 @@ export const Header = () => {
             </DropdownMenu>
 
             <Link to="/brodyr-vs-trykk" className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors" data-testid="nav-brodyr">
-              Brodyr vs Trykk
+              Brodering vs Trykk
             </Link>
             <Link to="/bedrift" className="text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors" data-testid="nav-bedrift">
               Bedrift
@@ -135,7 +135,7 @@ export const Header = () => {
                     Alle produkter
                   </Link>
                   <Link to="/brodyr-vs-trykk" className="text-lg font-medium text-slate-900" onClick={() => setMobileOpen(false)}>
-                    Brodyr vs Trykk
+                    Brodering vs Trykk
                   </Link>
                   <Link to="/bedrift" className="text-lg font-medium text-slate-900" onClick={() => setMobileOpen(false)}>
                     Bedrift
@@ -196,7 +196,7 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold text-white mb-4">Informasjon</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/brodyr-vs-trykk" className="hover:text-white transition-colors">Brodyr vs Trykk</Link></li>
+              <li><Link to="/brodyr-vs-trykk" className="hover:text-white transition-colors">Brodering vs Trykk</Link></li>
               <li><Link to="/bedrift" className="hover:text-white transition-colors">Bedrift</Link></li>
               <li><Link to="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
               <li><Link to="/om-oss" className="hover:text-white transition-colors">Om oss</Link></li>
