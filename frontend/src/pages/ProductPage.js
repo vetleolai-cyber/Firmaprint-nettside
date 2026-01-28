@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Upload, ZoomIn, ZoomOut, AlertTriangle, Minus, Plus } from 'lucide-react';
+import { Upload, ZoomIn, ZoomOut, AlertTriangle, Minus, Plus, RotateCw } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
@@ -18,7 +18,7 @@ export const ProductPage = () => {
   const { slug } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  const canvasRef = useRef(null);
+  const containerRef = useRef(null);
   const fileInputRef = useRef(null);
 
   const [product, setProduct] = useState(null);
@@ -28,7 +28,6 @@ export const ProductPage = () => {
   const [quantity, setQuantity] = useState(1);
 
   // Logo customizer state
-  const [logo, setLogo] = useState(null);
   const [logoPreview, setLogoPreview] = useState(null);
   const [logoPosition, setLogoPosition] = useState({ x: 50, y: 50 });
   const [logoScale, setLogoScale] = useState(1);
@@ -37,9 +36,11 @@ export const ProductPage = () => {
   const [printMethod, setPrintMethod] = useState('print');
   const [designPrice, setDesignPrice] = useState(0);
   const [warnings, setWarnings] = useState([]);
+  const [logoSize, setLogoSize] = useState({ width: 0, height: 0 });
 
   // Dragging state
   const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
 
   // Fetch product on mount
   useEffect(() => {
@@ -69,7 +70,7 @@ export const ProductPage = () => {
   // Calculate price when design changes
   useEffect(() => {
     const calculatePrice = async () => {
-      if (!logo || !product) return;
+      if (!logoPreview || !product) return;
 
       const area = product.print_areas.find(a => a.name === selectedArea);
       if (!area) return;
@@ -93,87 +94,10 @@ export const ProductPage = () => {
       }
     };
 
-    if (logo && product) {
+    if (logoPreview && product) {
       calculatePrice();
     }
-  }, [logo, logoScale, quantity, printMethod, product, selectedArea]);
-
-  // Draw canvas when product or design changes
-  useEffect(() => {
-    if (!product) return;
-
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    const variant = product.variants[selectedVariant];
-    const imgUrl = variant?.images?.[0] || 'https://via.placeholder.com/500';
-
-    canvas.width = 500;
-    canvas.height = 500;
-
-    // Fill with placeholder background
-    ctx.fillStyle = '#f8fafc';
-    ctx.fillRect(0, 0, 500, 500);
-
-    // Helper function to draw overlays
-    const drawOverlays = () => {
-      const area = product.print_areas.find(a => a.name === selectedArea);
-      if (area) {
-        const areaX = (area.x / 100) * 500;
-        const areaY = (area.y / 100) * 500;
-        const areaW = (area.width / 100) * 500;
-        const areaH = (area.height / 100) * 500;
-
-        // Draw print area
-        ctx.strokeStyle = '#2563EB';
-        ctx.lineWidth = 2;
-        ctx.setLineDash([5, 5]);
-        ctx.strokeRect(areaX, areaY, areaW, areaH);
-        ctx.setLineDash([]);
-
-        // Draw area label
-        ctx.fillStyle = '#2563EB';
-        ctx.font = '12px Inter, sans-serif';
-        ctx.fillText(area.name_no, areaX + 5, areaY - 5);
-
-        // Draw logo if exists
-        if (logo) {
-          const logoX = areaX + (logoPosition.x / 100) * areaW;
-          const logoY = areaY + (logoPosition.y / 100) * areaH;
-          const logoW = logo.width * logoScale * 0.3;
-          const logoH = logo.height * logoScale * 0.3;
-
-          ctx.save();
-          ctx.translate(logoX, logoY);
-          ctx.rotate((logoRotation * Math.PI) / 180);
-          ctx.drawImage(logo, -logoW / 2, -logoH / 2, logoW, logoH);
-          ctx.restore();
-        }
-      }
-    };
-
-    // Load product image
-    const productImg = new Image();
-    productImg.crossOrigin = 'anonymous';
-    
-    productImg.onload = () => {
-      ctx.drawImage(productImg, 0, 0, 500, 500);
-      drawOverlays();
-    };
-    
-    productImg.onerror = () => {
-      ctx.fillStyle = '#e2e8f0';
-      ctx.fillRect(0, 0, 500, 500);
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '16px Inter, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Produktbilde', 250, 250);
-      drawOverlays();
-    };
-
-    productImg.src = imgUrl;
-  }, [product, selectedVariant, selectedArea, logo, logoPosition, logoScale, logoRotation]);
+  }, [logoPreview, logoScale, quantity, printMethod, product, selectedArea]);
 
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
@@ -194,8 +118,8 @@ export const ProductPage = () => {
     reader.onload = (event) => {
       const img = new Image();
       img.onload = () => {
-        setLogo(img);
         setLogoPreview(event.target.result);
+        setLogoSize({ width: img.width, height: img.height });
 
         const newWarnings = [];
         if (img.width < 300 || img.height < 300) {
@@ -208,30 +132,55 @@ export const ProductPage = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleCanvasMouseDown = (e) => {
-    if (!logo) return;
-    setIsDragging(true);
-  };
-
-  const handleCanvasMouseMove = (e) => {
-    if (!isDragging || !logo || !product) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const rect = canvas.getBoundingClientRect();
+  const handleMouseDown = (e) => {
+    if (!logoPreview) return;
+    e.preventDefault();
+    
+    const container = containerRef.current;
+    if (!container) return;
+    
+    const rect = container.getBoundingClientRect();
     const area = product.print_areas.find(a => a.name === selectedArea);
     if (!area) return;
 
-    const scaleX = 500 / rect.width;
-    const scaleY = 500 / rect.height;
+    // Calculate area bounds in pixels
+    const areaX = (area.x / 100) * rect.width;
+    const areaY = (area.y / 100) * rect.height;
+    const areaW = (area.width / 100) * rect.width;
+    const areaH = (area.height / 100) * rect.height;
 
-    const areaX = (area.x / 100) * 500;
-    const areaY = (area.y / 100) * 500;
-    const areaW = (area.width / 100) * 500;
-    const areaH = (area.height / 100) * 500;
+    // Current logo position in pixels
+    const logoX = areaX + (logoPosition.x / 100) * areaW;
+    const logoY = areaY + (logoPosition.y / 100) * areaH;
 
-    const mouseX = (e.clientX - rect.left) * scaleX;
-    const mouseY = (e.clientY - rect.top) * scaleY;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    // Check if click is on logo
+    const logoDisplaySize = 80 * logoScale;
+    if (Math.abs(mouseX - logoX) < logoDisplaySize/2 && Math.abs(mouseY - logoY) < logoDisplaySize/2) {
+      setIsDragging(true);
+      setDragOffset({ x: mouseX - logoX, y: mouseY - logoY });
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging || !logoPreview || !product) return;
+    
+    const container = containerRef.current;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const area = product.print_areas.find(a => a.name === selectedArea);
+    if (!area) return;
+
+    const areaX = (area.x / 100) * rect.width;
+    const areaY = (area.y / 100) * rect.height;
+    const areaW = (area.width / 100) * rect.width;
+    const areaH = (area.height / 100) * rect.height;
+
+    const mouseX = e.clientX - rect.left - dragOffset.x;
+    const mouseY = e.clientY - rect.top - dragOffset.y;
 
     const newX = Math.max(0, Math.min(100, ((mouseX - areaX) / areaW) * 100));
     const newY = Math.max(0, Math.min(100, ((mouseY - areaY) / areaH) * 100));
@@ -239,7 +188,7 @@ export const ProductPage = () => {
     setLogoPosition({ x: newX, y: newY });
   };
 
-  const handleCanvasMouseUp = () => {
+  const handleMouseUp = () => {
     setIsDragging(false);
   };
 
@@ -250,7 +199,7 @@ export const ProductPage = () => {
     }
 
     const area = product.print_areas.find(a => a.name === selectedArea);
-    const designObj = logo ? {
+    const designObj = logoPreview ? {
       logo_url: logoPreview,
       logo_preview: logoPreview,
       position_x: logoPosition.x,
@@ -313,31 +262,76 @@ export const ProductPage = () => {
 
   const variant = product.variants[selectedVariant];
   const totalPrice = (product.base_price + designPrice) * quantity;
+  const currentArea = product.print_areas.find(a => a.name === selectedArea);
 
   return (
     <Layout>
       <div className="bg-white">
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
           <div className="grid lg:grid-cols-12 gap-8">
-            {/* Left: Canvas/Preview */}
+            {/* Left: Product Preview with Logo Overlay */}
             <div className="lg:col-span-7">
               <div className="sticky top-24">
                 <div className="bg-slate-50 rounded-2xl p-4 md:p-8">
-                  <canvas
-                    ref={canvasRef}
-                    width={500}
-                    height={500}
-                    className="w-full aspect-square rounded-xl cursor-move bg-white shadow-inner"
-                    onMouseDown={handleCanvasMouseDown}
-                    onMouseMove={handleCanvasMouseMove}
-                    onMouseUp={handleCanvasMouseUp}
-                    onMouseLeave={handleCanvasMouseUp}
-                    data-testid="product-canvas"
-                  />
+                  {/* Product Image Container */}
+                  <div 
+                    ref={containerRef}
+                    className="relative w-full aspect-square bg-white rounded-xl overflow-hidden shadow-inner select-none"
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                    style={{ cursor: logoPreview ? (isDragging ? 'grabbing' : 'grab') : 'default' }}
+                    data-testid="product-preview"
+                  >
+                    {/* Product Image */}
+                    <img
+                      src={variant?.images?.[0] || 'https://via.placeholder.com/500'}
+                      alt={product.name}
+                      className="w-full h-full object-contain"
+                      draggable={false}
+                    />
+                    
+                    {/* Print Area Overlay */}
+                    {currentArea && (
+                      <div
+                        className="absolute border-2 border-dashed border-blue-500 bg-blue-500/5 pointer-events-none"
+                        style={{
+                          left: `${currentArea.x}%`,
+                          top: `${currentArea.y}%`,
+                          width: `${currentArea.width}%`,
+                          height: `${currentArea.height}%`,
+                        }}
+                      >
+                        <span className="absolute -top-6 left-0 text-xs font-medium text-blue-600 bg-white px-2 py-0.5 rounded shadow-sm">
+                          {currentArea.name_no}
+                        </span>
+                      </div>
+                    )}
 
-                  {/* View selector */}
+                    {/* Logo Overlay */}
+                    {logoPreview && currentArea && (
+                      <div
+                        className="absolute pointer-events-none"
+                        style={{
+                          left: `${currentArea.x + (logoPosition.x / 100) * currentArea.width}%`,
+                          top: `${currentArea.y + (logoPosition.y / 100) * currentArea.height}%`,
+                          transform: `translate(-50%, -50%) scale(${logoScale}) rotate(${logoRotation}deg)`,
+                        }}
+                      >
+                        <img
+                          src={logoPreview}
+                          alt="Logo"
+                          className="max-w-[80px] max-h-[80px] object-contain drop-shadow-lg"
+                          draggable={false}
+                        />
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Print Area Selector */}
                   {product.print_areas && product.print_areas.length > 1 && (
-                    <div className="flex justify-center gap-2 mt-4">
+                    <div className="flex flex-wrap justify-center gap-2 mt-4">
                       {product.print_areas.map((area) => (
                         <Button
                           key={area.name}
@@ -352,17 +346,20 @@ export const ProductPage = () => {
                     </div>
                   )}
 
-                  {/* Logo controls */}
-                  {logo && (
+                  {/* Logo Controls */}
+                  {logoPreview && (
                     <Card className="mt-4 p-4">
-                      <div className="grid grid-cols-3 gap-4">
+                      <p className="text-sm text-slate-600 mb-3">
+                        <strong>Tips:</strong> Dra logoen for å plassere den i trykkområdet
+                      </p>
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div>
-                          <Label className="text-xs text-slate-500">Skala</Label>
-                          <div className="flex items-center gap-2 mt-1">
-                            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setLogoScale(Math.max(0.2, logoScale - 0.1))}>
+                          <Label className="text-xs text-slate-500">Størrelse</Label>
+                          <div className="flex items-center gap-1 mt-1">
+                            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setLogoScale(Math.max(0.3, logoScale - 0.1))}>
                               <ZoomOut className="w-4 h-4" />
                             </Button>
-                            <span className="text-sm font-mono w-12 text-center">{Math.round(logoScale * 100)}%</span>
+                            <span className="text-sm font-mono w-10 text-center">{Math.round(logoScale * 100)}%</span>
                             <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setLogoScale(Math.min(2, logoScale + 0.1))}>
                               <ZoomIn className="w-4 h-4" />
                             </Button>
@@ -370,18 +367,21 @@ export const ProductPage = () => {
                         </div>
                         <div>
                           <Label className="text-xs text-slate-500">Rotasjon</Label>
-                          <Slider
-                            value={[logoRotation]}
-                            min={-180}
-                            max={180}
-                            step={5}
-                            onValueChange={([val]) => setLogoRotation(val)}
-                            className="mt-3"
-                          />
-                          <span className="text-xs text-slate-500">{logoRotation}°</span>
+                          <div className="flex items-center gap-1 mt-1">
+                            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setLogoRotation(logoRotation - 15)}>
+                              <RotateCw className="w-4 h-4 scale-x-[-1]" />
+                            </Button>
+                            <span className="text-sm font-mono w-10 text-center">{logoRotation}°</span>
+                            <Button variant="outline" size="icon" className="h-8 w-8" onClick={() => setLogoRotation(logoRotation + 15)}>
+                              <RotateCw className="w-4 h-4" />
+                            </Button>
+                          </div>
                         </div>
-                        <div className="flex items-end">
-                          <Button variant="outline" size="sm" onClick={() => { setLogo(null); setLogoPreview(null); setWarnings([]); }}>
+                        <div className="col-span-2 flex items-end gap-2">
+                          <Button variant="outline" size="sm" onClick={() => { setLogoPosition({ x: 50, y: 50 }); setLogoScale(1); setLogoRotation(0); }}>
+                            Nullstill
+                          </Button>
+                          <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700" onClick={() => { setLogoPreview(null); setWarnings([]); }}>
                             Fjern logo
                           </Button>
                         </div>
@@ -417,13 +417,13 @@ export const ProductPage = () => {
 
                 {/* Color selector */}
                 <div>
-                  <Label>Farge: {variant.color}</Label>
-                  <div className="flex gap-2 mt-2">
+                  <Label>Farge: <span className="font-semibold">{variant.color}</span></Label>
+                  <div className="flex flex-wrap gap-2 mt-2">
                     {product.variants.map((v, i) => (
                       <button
                         key={i}
                         onClick={() => setSelectedVariant(i)}
-                        className={`w-10 h-10 rounded-full border-2 transition-all ${selectedVariant === i ? 'border-blue-600 ring-2 ring-blue-200' : 'border-slate-200'}`}
+                        className={`w-10 h-10 rounded-full border-2 transition-all ${selectedVariant === i ? 'border-blue-600 ring-2 ring-blue-200' : 'border-slate-200 hover:border-slate-300'}`}
                         style={{ backgroundColor: v.color_hex }}
                         title={v.color}
                         data-testid={`color-${v.color}`}
@@ -460,7 +460,7 @@ export const ProductPage = () => {
                     className="hidden"
                     data-testid="logo-upload-input"
                   />
-                  {!logo ? (
+                  {!logoPreview ? (
                     <button
                       onClick={() => fileInputRef.current?.click()}
                       className="w-full flex flex-col items-center gap-3 py-6 hover:bg-slate-100 rounded-lg transition-colors"
@@ -476,9 +476,9 @@ export const ProductPage = () => {
                     </button>
                   ) : (
                     <div className="flex items-center gap-4">
-                      <img src={logoPreview} alt="Logo" className="w-16 h-16 object-contain bg-white rounded-lg border" />
+                      <img src={logoPreview} alt="Logo" className="w-16 h-16 object-contain bg-white rounded-lg border p-1" />
                       <div className="flex-1">
-                        <p className="font-semibold text-slate-900">Logo lastet opp</p>
+                        <p className="font-semibold text-slate-900">Logo lastet opp ✓</p>
                         <p className="text-sm text-slate-500">Dra logoen på bildet for å plassere</p>
                       </div>
                       <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
@@ -489,24 +489,26 @@ export const ProductPage = () => {
                 </Card>
 
                 {/* Print method */}
-                {logo && product.print_methods.length > 0 && (
+                {logoPreview && product.print_methods.length > 0 && (
                   <div>
                     <Label>Trykkmetode</Label>
                     <RadioGroup value={printMethod} onValueChange={setPrintMethod} className="mt-2">
                       {product.print_methods.includes('print') && (
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-slate-50 cursor-pointer" onClick={() => setPrintMethod('print')}>
                           <RadioGroupItem value="print" id="print" />
-                          <Label htmlFor="print" className="font-normal cursor-pointer">
-                            Trykk – Best for fotorealistiske motiver
-                          </Label>
+                          <div>
+                            <Label htmlFor="print" className="font-medium cursor-pointer">Trykk</Label>
+                            <p className="text-xs text-slate-500">Best for fotorealistiske motiver og store trykk</p>
+                          </div>
                         </div>
                       )}
                       {product.print_methods.includes('embroidery') && (
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-2 p-3 border rounded-lg hover:bg-slate-50 cursor-pointer" onClick={() => setPrintMethod('embroidery')}>
                           <RadioGroupItem value="embroidery" id="embroidery" />
-                          <Label htmlFor="embroidery" className="font-normal cursor-pointer">
-                            Brodering – Premium og holdbart
-                          </Label>
+                          <div>
+                            <Label htmlFor="embroidery" className="font-medium cursor-pointer">Brodering</Label>
+                            <p className="text-xs text-slate-500">Premium og holdbart, perfekt for logoer</p>
+                          </div>
                         </div>
                       )}
                     </RadioGroup>
@@ -547,10 +549,10 @@ export const ProductPage = () => {
                 <Card className="p-4 bg-slate-50">
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
-                      <span className="text-slate-600">Plagg ({quantity} stk)</span>
+                      <span className="text-slate-600">Plagg ({quantity} stk à {product.base_price} kr)</span>
                       <span>{(product.base_price * quantity).toFixed(2)} kr</span>
                     </div>
-                    {logo && (
+                    {logoPreview && (
                       <div className="flex justify-between text-sm">
                         <span className="text-slate-600">{printMethod === 'embroidery' ? 'Brodering' : 'Trykk'} ({quantity} stk)</span>
                         <span>{(designPrice * quantity).toFixed(2)} kr</span>
@@ -576,7 +578,7 @@ export const ProductPage = () => {
                 </Button>
 
                 {/* Product details */}
-                <div className="text-sm text-slate-600 space-y-2">
+                <div className="text-sm text-slate-600 space-y-2 pt-4 border-t">
                   <div className="flex justify-between">
                     <span>Leveringstid:</span>
                     <span className="font-medium">{product.delivery_days} virkedager</span>
