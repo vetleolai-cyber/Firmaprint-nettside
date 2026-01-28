@@ -29,7 +29,7 @@ function App() {
               <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
               <Route path="/checkout/cancel" element={<CheckoutCancelPage />} />
               <Route path="/bedrift" element={<BusinessPage />} />
-              <Route path="/brodyr-vs-trykk" element={<PrintVsEmbroideryPage />} />
+              <Route path="/brodering-vs-trykk" element={<PrintVsEmbroideryPage />} />
               <Route path="/kontakt" element={<ContactPage />} />
               <Route path="/faq" element={<FAQPage />} />
               <Route path="/om-oss" element={<AboutPage />} />
