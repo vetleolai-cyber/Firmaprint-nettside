@@ -502,7 +502,8 @@ async def add_to_cart(session_id: str, item: AddToCartRequest):
     # Recalculate totals
     subtotal = sum(i['base_price'] * i['quantity'] for i in items)
     design_total = sum(i['design_price'] * i['quantity'] for i in items)
-    total = subtotal + design_total
+    shipping = calculate_shipping(subtotal + design_total)
+    total = subtotal + design_total + shipping
     
     # Update cart
     updated_cart = {
@@ -512,6 +513,7 @@ async def add_to_cart(session_id: str, item: AddToCartRequest):
         'items': items,
         'subtotal': round(subtotal, 2),
         'design_total': round(design_total, 2),
+        'shipping': round(shipping, 2),
         'total': round(total, 2),
         'updated_at': datetime.now(timezone.utc).isoformat()
     }
