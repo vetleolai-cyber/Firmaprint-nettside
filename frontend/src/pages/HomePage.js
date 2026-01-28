@@ -20,7 +20,7 @@ const categories = [
 const steps = [
   { number: '01', title: 'Velg plagg', description: 'Finn riktig plagg fra vår katalog med høykvalitets profilklær.' },
   { number: '02', title: 'Last opp logo', description: 'Last opp din logo og plasser den akkurat der du vil ha den.' },
-  { number: '03', title: 'Velg metode', description: 'Velg mellom trykk eller brodyr basert på dine behov.' },
+  { number: '03', title: 'Velg metode', description: 'Velg mellom trykk eller brodering basert på dine behov.' },
   { number: '04', title: 'Bestill', description: 'Fullfør bestillingen og få varene levert raskt til deg.' },
 ];
 
@@ -61,7 +61,7 @@ export const HomePage = () => {
               </div>
               <h1 className="font-manrope text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-tight">
                 Profilklær med logo —{' '}
-                <span className="text-blue-600">trykk og brodyr</span>
+                <span className="text-blue-600">trykk og brodering</span>
               </h1>
               <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-xl">
                 Fra t-skjorter til arbeidsklær. Design selv med vår enkle logo-editor og få profesjonelle profilklær levert raskt til din bedrift.
