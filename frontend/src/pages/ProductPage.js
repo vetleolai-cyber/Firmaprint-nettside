@@ -72,32 +72,33 @@ export const ProductPage = () => {
     const calculatePrice = async () => {
       if (!logoPreview || !product) return;
 
-      const area = product.print_areas.find(a => a.name === selectedArea);
-      if (!area) return;
-
-      const widthCm = area.max_width_cm * logoScale;
-      const heightCm = area.max_height_cm * logoScale;
-
       try {
         const res = await axios.post(`${API}/pricing/calculate`, null, {
           params: {
             print_method: printMethod,
-            width_cm: widthCm,
-            height_cm: heightCm,
-            quantity: quantity,
-            complexity: 'normal'
+            print_area: selectedArea,
+            quantity: quantity
           }
         });
         setDesignPrice(res.data.price_per_item);
       } catch (err) {
         console.error('Failed to calculate price:', err);
+        // Fallback to fixed prices
+        if (printMethod === 'embroidery') {
+          setDesignPrice(89);
+        } else {
+          const largeAreas = ['full_back', 'back', 'center_chest'];
+          setDesignPrice(largeAreas.includes(selectedArea) ? 79 : 59);
+        }
       }
     };
 
     if (logoPreview && product) {
       calculatePrice();
+    } else {
+      setDesignPrice(0);
     }
-  }, [logoPreview, logoScale, quantity, printMethod, product, selectedArea]);
+  }, [logoPreview, quantity, printMethod, product, selectedArea]);
 
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
