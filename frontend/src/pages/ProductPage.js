@@ -1,15 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Upload, Move, RotateCw, ZoomIn, ZoomOut, Check, AlertTriangle, ChevronLeft, ChevronRight, Minus, Plus } from 'lucide-react';
+import { Upload, ZoomIn, ZoomOut, AlertTriangle, Minus, Plus } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { RadioGroup, RadioGroupItem } from '../components/ui/radio-group';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
 import { Slider } from '../components/ui/slider';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { Layout } from '../components/Layout';
 import { useCart } from '../context/AppContext';
 import { toast } from 'sonner';
@@ -28,7 +26,6 @@ export const ProductPage = () => {
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [activeView, setActiveView] = useState('front');
 
   // Logo customizer state
   const [logo, setLogo] = useState(null);
@@ -43,102 +40,70 @@ export const ProductPage = () => {
 
   // Dragging state
   const [isDragging, setIsDragging] = useState(false);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
+  // Fetch product on mount
   useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(`${API}/products/${slug}`);
+        setProduct(res.data);
+        if (res.data.variants?.[0]?.sizes?.[0]) {
+          setSelectedSize(res.data.variants[0].sizes[0]);
+        }
+        if (res.data.print_areas?.[0]) {
+          setSelectedArea(res.data.print_areas[0].name);
+        }
+        if (res.data.print_methods?.[0]) {
+          setPrintMethod(res.data.print_methods.includes('embroidery') ? 'embroidery' : 'print');
+        }
+      } catch (err) {
+        console.error('Failed to fetch product:', err);
+        toast.error('Kunne ikke laste produktet');
+      } finally {
+        setLoading(false);
+      }
+    };
     fetchProduct();
   }, [slug]);
 
+  // Calculate price when design changes
   useEffect(() => {
+    const calculatePrice = async () => {
+      if (!logo || !product) return;
+
+      const area = product.print_areas.find(a => a.name === selectedArea);
+      if (!area) return;
+
+      const widthCm = area.max_width_cm * logoScale;
+      const heightCm = area.max_height_cm * logoScale;
+
+      try {
+        const res = await axios.post(`${API}/pricing/calculate`, null, {
+          params: {
+            print_method: printMethod,
+            width_cm: widthCm,
+            height_cm: heightCm,
+            quantity: quantity,
+            complexity: 'normal'
+          }
+        });
+        setDesignPrice(res.data.price_per_item);
+      } catch (err) {
+        console.error('Failed to calculate price:', err);
+      }
+    };
+
     if (logo && product) {
       calculatePrice();
     }
-    drawCanvas();
-  }, [logo, logoPosition, logoScale, logoRotation, quantity, printMethod, selectedVariant, product, selectedArea, drawCanvas]);
+  }, [logo, logoScale, quantity, printMethod, product, selectedArea]);
 
-  const fetchProduct = async () => {
-    try {
-      const res = await axios.get(`${API}/products/${slug}`);
-      setProduct(res.data);
-      if (res.data.variants?.[0]?.sizes?.[0]) {
-        setSelectedSize(res.data.variants[0].sizes[0]);
-      }
-      if (res.data.print_areas?.[0]) {
-        setSelectedArea(res.data.print_areas[0].name);
-      }
-      if (res.data.print_methods?.[0]) {
-        setPrintMethod(res.data.print_methods.includes('embroidery') ? 'embroidery' : 'print');
-      }
-    } catch (err) {
-      console.error('Failed to fetch product:', err);
-      toast.error('Kunne ikke laste produktet');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Draw canvas when product or design changes
+  useEffect(() => {
+    if (!product) return;
 
-  const calculatePrice = async () => {
-    if (!logo) return;
-
-    const area = product.print_areas.find(a => a.name === selectedArea);
-    if (!area) return;
-
-    const widthCm = area.max_width_cm * logoScale;
-    const heightCm = area.max_height_cm * logoScale;
-
-    try {
-      const res = await axios.post(`${API}/pricing/calculate`, null, {
-        params: {
-          print_method: printMethod,
-          width_cm: widthCm,
-          height_cm: heightCm,
-          quantity: quantity,
-          complexity: 'normal'
-        }
-      });
-      setDesignPrice(res.data.price_per_item);
-    } catch (err) {
-      console.error('Failed to calculate price:', err);
-    }
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    const allowedTypes = ['image/png', 'image/jpeg', 'image/svg+xml'];
-    if (!allowedTypes.includes(file.type)) {
-      toast.error('Ugyldig filtype. Bruk PNG, JPG eller SVG.');
-      return;
-    }
-
-    if (file.size > 10 * 1024 * 1024) {
-      toast.error('Filen er for stor. Maks 10MB.');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const img = new Image();
-      img.onload = () => {
-        setLogo(img);
-        setLogoPreview(event.target.result);
-
-        // Check resolution warnings
-        const newWarnings = [];
-        if (img.width < 300 || img.height < 300) {
-          newWarnings.push('Logoen har lav oppløsning. For best resultat, bruk minst 300x300 piksler.');
-        }
-        setWarnings(newWarnings);
-      };
-      img.src = event.target.result;
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const drawCanvas = useCallback(() => {
     const canvas = canvasRef.current;
-    if (!canvas || !product) return;
+    if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     const variant = product.variants[selectedVariant];
@@ -147,33 +112,12 @@ export const ProductPage = () => {
     canvas.width = 500;
     canvas.height = 500;
 
-    // Fill with a placeholder background first
+    // Fill with placeholder background
     ctx.fillStyle = '#f8fafc';
     ctx.fillRect(0, 0, 500, 500);
 
-    // Load product image
-    const productImg = new Image();
-    productImg.crossOrigin = 'anonymous';
-    
-    productImg.onload = () => {
-      // Draw product
-      ctx.drawImage(productImg, 0, 0, 500, 500);
-      drawOverlays(ctx);
-    };
-    
-    productImg.onerror = () => {
-      // Draw placeholder on error
-      ctx.fillStyle = '#e2e8f0';
-      ctx.fillRect(0, 0, 500, 500);
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = '16px Inter, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText('Produktbilde', 250, 250);
-      drawOverlays(ctx);
-    };
-
     // Helper function to draw overlays
-    const drawOverlays = (ctx) => {
+    const drawOverlays = () => {
       const area = product.print_areas.find(a => a.name === selectedArea);
       if (area) {
         const areaX = (area.x / 100) * 500;
@@ -209,32 +153,85 @@ export const ProductPage = () => {
       }
     };
 
+    // Load product image
+    const productImg = new Image();
+    productImg.crossOrigin = 'anonymous';
+    
+    productImg.onload = () => {
+      ctx.drawImage(productImg, 0, 0, 500, 500);
+      drawOverlays();
+    };
+    
+    productImg.onerror = () => {
+      ctx.fillStyle = '#e2e8f0';
+      ctx.fillRect(0, 0, 500, 500);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '16px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Produktbilde', 250, 250);
+      drawOverlays();
+    };
+
     productImg.src = imgUrl;
   }, [product, selectedVariant, selectedArea, logo, logoPosition, logoScale, logoRotation]);
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const allowedTypes = ['image/png', 'image/jpeg', 'image/svg+xml'];
+    if (!allowedTypes.includes(file.type)) {
+      toast.error('Ugyldig filtype. Bruk PNG, JPG eller SVG.');
+      return;
+    }
+
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('Filen er for stor. Maks 10MB.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        setLogo(img);
+        setLogoPreview(event.target.result);
+
+        const newWarnings = [];
+        if (img.width < 300 || img.height < 300) {
+          newWarnings.push('Logoen har lav oppløsning. For best resultat, bruk minst 300x300 piksler.');
+        }
+        setWarnings(newWarnings);
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleCanvasMouseDown = (e) => {
     if (!logo) return;
-    const rect = canvasRef.current.getBoundingClientRect();
     setIsDragging(true);
-    setDragStart({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top
-    });
   };
 
   const handleCanvasMouseMove = (e) => {
-    if (!isDragging || !logo) return;
-    const rect = canvasRef.current.getBoundingClientRect();
+    if (!isDragging || !logo || !product) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const rect = canvas.getBoundingClientRect();
     const area = product.print_areas.find(a => a.name === selectedArea);
     if (!area) return;
+
+    const scaleX = 500 / rect.width;
+    const scaleY = 500 / rect.height;
 
     const areaX = (area.x / 100) * 500;
     const areaY = (area.y / 100) * 500;
     const areaW = (area.width / 100) * 500;
     const areaH = (area.height / 100) * 500;
 
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
+    const mouseX = (e.clientX - rect.left) * scaleX;
+    const mouseY = (e.clientY - rect.top) * scaleY;
 
     const newX = Math.max(0, Math.min(100, ((mouseX - areaX) / areaW) * 100));
     const newY = Math.max(0, Math.min(100, ((mouseY - areaY) / areaH) * 100));
@@ -260,7 +257,7 @@ export const ProductPage = () => {
       position_y: logoPosition.y,
       scale: logoScale,
       rotation: logoRotation,
-      view: activeView,
+      view: 'front',
       print_area: selectedArea,
       print_method: printMethod,
       width_cm: area ? area.max_width_cm * logoScale : 10,
@@ -373,16 +370,14 @@ export const ProductPage = () => {
                         </div>
                         <div>
                           <Label className="text-xs text-slate-500">Rotasjon</Label>
-                          <div className="flex items-center gap-2 mt-1">
-                            <Slider
-                              value={[logoRotation]}
-                              min={-180}
-                              max={180}
-                              step={5}
-                              onValueChange={([val]) => setLogoRotation(val)}
-                              className="w-full"
-                            />
-                          </div>
+                          <Slider
+                            value={[logoRotation]}
+                            min={-180}
+                            max={180}
+                            step={5}
+                            onValueChange={([val]) => setLogoRotation(val)}
+                            className="mt-3"
+                          />
                           <span className="text-xs text-slate-500">{logoRotation}°</span>
                         </div>
                         <div className="flex items-end">
