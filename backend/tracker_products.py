@@ -1,7 +1,7 @@
 """
 Seed script for Tracker products
 Based on https://www.tracker.no/ catalog with 10%+ margin pricing
-Print areas adjusted to match actual product images
+Using reliable image sources
 """
 
 tracker_products = [
@@ -14,16 +14,16 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 119.0,
         "variants": [
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/1010_00-2.jpg"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/1010_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/1010_05.jpg"], "stock": {}},
-            {"color": "Rød", "color_hex": "#DC2626", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/1010_06.jpg"], "stock": {}},
-            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/1010_08.jpg"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=600"], "stock": {}},
+            {"color": "Rød", "color_hex": "#DC2626", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1562157873-818bc0726f68?w=600"], "stock": {}},
+            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 28, "width": 15, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 30, "y": 25, "width": 40, "height": 25, "max_width_cm": 25, "max_height_cm": 20},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 25, "width": 18, "height": 15, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 30, "y": 22, "width": 40, "height": 28, "max_width_cm": 25, "max_height_cm": 20},
             {"name": "full_back", "name_no": "Rygg", "x": 25, "y": 20, "width": 50, "height": 45, "max_width_cm": 35, "max_height_cm": 40}
         ],
         "materials": ["100% bomull, 150g/m²"],
@@ -35,21 +35,21 @@ tracker_products = [
         "active": True
     },
     {
-        "name": "Tracker 1012 Original Slim-T",
+        "name": "Tracker 1012 Original Slim-T Dame",
         "slug": "tracker-1012-original-slim-t",
         "description": "Slim-fit t-skjorte for damer i myk bomull. Feminin passform med smale ermer.",
         "category": "tshirts",
         "brand": "Tracker",
         "base_price": 129.0,
         "variants": [
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/1012_00.jpg"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/1012_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/1012_05.jpg"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["https://images.unsplash.com/photo-1554568218-0f1715e72254?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL"], "images": ["https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 30, "width": 14, "height": 10, "max_width_cm": 7, "max_height_cm": 7},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 32, "y": 28, "width": 36, "height": 22, "max_width_cm": 22, "max_height_cm": 18},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 28, "width": 16, "height": 14, "max_width_cm": 7, "max_height_cm": 7},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 30, "y": 25, "width": 40, "height": 26, "max_width_cm": 22, "max_height_cm": 18},
         ],
         "materials": ["100% bomull, 150g/m²"],
         "fit": "Slim fit",
@@ -67,15 +67,14 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 149.0,
         "variants": [
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/1200_00.jpg"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/1200_04.jpg"], "stock": {}},
-            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/1200_08.jpg"], "stock": {}},
-            {"color": "Rød", "color_hex": "#DC2626", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/1200_06.jpg"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1618517351616-38fb9c5210c6?w=600"], "stock": {}},
+            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=600"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 28, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 30, "y": 25, "width": 40, "height": 25, "max_width_cm": 25, "max_height_cm": 20},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 25, "width": 18, "height": 15, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 28, "y": 22, "width": 44, "height": 28, "max_width_cm": 25, "max_height_cm": 20},
         ],
         "materials": ["100% polyester, 135g/m²"],
         "fit": "Regular",
@@ -85,32 +84,8 @@ tracker_products = [
         "featured": True,
         "active": True
     },
-    {
-        "name": "Tracker 1213 Hi-Vis CoolDry T-Shirt",
-        "slug": "tracker-1213-hi-vis-cooldry-t-shirt",
-        "description": "Fluoriserende t-skjorte i synlighetsklasse 2 etter EN ISO20471. Teknisk materiale med god fuktavledning.",
-        "category": "workwear",
-        "brand": "Tracker",
-        "base_price": 199.0,
-        "variants": [
-            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/1213.jpg"], "stock": {}},
-            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/1213_37.jpg"], "stock": {}},
-        ],
-        "print_methods": ["print", "embroidery"],
-        "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 22, "width": 14, "height": 10, "max_width_cm": 7, "max_height_cm": 6},
-            {"name": "back", "name_no": "Rygg", "x": 28, "y": 30, "width": 44, "height": 30, "max_width_cm": 25, "max_height_cm": 18},
-        ],
-        "materials": ["100% polyester, 135g/m²"],
-        "fit": "Regular",
-        "delivery_days": 7,
-        "best_for": ["workwear", "safety", "construction"],
-        "min_quantity": 1,
-        "featured": False,
-        "active": True
-    },
     
-    # ==================== PIQUE ====================
+    # ==================== PIQUE / POLO ====================
     {
         "name": "Tracker 2010 Original Pique",
         "slug": "tracker-2010-original-pique",
@@ -119,15 +94,15 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 229.0,
         "variants": [
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/03/2010_00.jpg"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/03/2010_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/03/2010_05.jpg"], "stock": {}},
-            {"color": "Lysblå", "color_hex": "#93C5FD", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/03/2010_09.jpg"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1625910513413-5fc51d87c6c3?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=600"], "stock": {}},
+            {"color": "Lysblå", "color_hex": "#93C5FD", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=600"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 35, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 7},
-            {"name": "sleeve", "name_no": "Erme", "x": 12, "y": 32, "width": 12, "height": 10, "max_width_cm": 5, "max_height_cm": 4}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 30, "width": 16, "height": 14, "max_width_cm": 8, "max_height_cm": 7},
+            {"name": "sleeve", "name_no": "Erme", "x": 8, "y": 32, "width": 14, "height": 12, "max_width_cm": 5, "max_height_cm": 4}
         ],
         "materials": ["100% bomull pique, 210g/m²"],
         "fit": "Classic",
@@ -135,30 +110,6 @@ tracker_products = [
         "best_for": ["corporate", "event", "hospitality"],
         "min_quantity": 1,
         "featured": True,
-        "active": True
-    },
-    {
-        "name": "Tracker 2110 Cool Dry Sport Pique",
-        "slug": "tracker-2110-cool-dry-sport-pique",
-        "description": "Sporty pique polo med fukttransporterende egenskaper. Ideell for aktiv bruk og golf.",
-        "category": "tshirts",
-        "brand": "Tracker",
-        "base_price": 259.0,
-        "variants": [
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/2110_00.jpg"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/2110_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/2110_05.jpg"], "stock": {}},
-        ],
-        "print_methods": ["embroidery", "print"],
-        "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 35, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 7},
-        ],
-        "materials": ["100% polyester, 150g/m²"],
-        "fit": "Regular",
-        "delivery_days": 5,
-        "best_for": ["sport", "golf", "corporate"],
-        "min_quantity": 1,
-        "featured": False,
         "active": True
     },
     
@@ -171,15 +122,15 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 329.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/3010_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/3010_05.jpg"], "stock": {}},
-            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/3010_25.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1572495532056-8583af1cbae0?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1578681994506-b8f463449011?w=600"], "stock": {}},
+            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 28, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 28, "y": 25, "width": 44, "height": 28, "max_width_cm": 30, "max_height_cm": 25},
-            {"name": "full_back", "name_no": "Rygg", "x": 22, "y": 18, "width": 56, "height": 50, "max_width_cm": 40, "max_height_cm": 40}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 25, "width": 16, "height": 14, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 26, "y": 22, "width": 48, "height": 30, "max_width_cm": 30, "max_height_cm": 25},
+            {"name": "full_back", "name_no": "Rygg", "x": 20, "y": 18, "width": 60, "height": 50, "max_width_cm": 40, "max_height_cm": 40}
         ],
         "materials": ["80% bomull, 20% polyester, 280g/m²"],
         "fit": "Regular",
@@ -190,31 +141,6 @@ tracker_products = [
         "active": True
     },
     {
-        "name": "Tracker 3060 Original Sweat m/Zip",
-        "slug": "tracker-3060-original-sweat-zip",
-        "description": "Sweatshirt med glidelås i halsen. Praktisk og behagelig for hverdagsbruk.", 
-        "category": "hoodies",
-        "brand": "Tracker",
-        "base_price": 429.0,
-        "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/3060_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/3060_05.jpg"], "stock": {}},
-            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/3060_22.jpg"], "stock": {}},
-        ],
-        "print_methods": ["print", "embroidery"],
-        "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 32, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "full_back", "name_no": "Rygg", "x": 22, "y": 20, "width": 56, "height": 48, "max_width_cm": 40, "max_height_cm": 40}
-        ],
-        "materials": ["80% bomull, 20% polyester, 280g/m²"],
-        "fit": "Regular",
-        "delivery_days": 5,
-        "best_for": ["team", "casual", "workwear"],
-        "min_quantity": 1,
-        "featured": True,
-        "active": True
-    },
-    {
         "name": "Tracker 3065 Original Hood",
         "slug": "tracker-3065-original-hood",
         "description": "Klassisk hoodie med kengurulomme og justerbar hette. Myk innside og god passform.",
@@ -222,16 +148,16 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 449.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/3065_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/3065_05.jpg"], "stock": {}},
-            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/3065_25.jpg"], "stock": {}},
-            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/3065_08.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.pexels.com/photos/7688469/pexels-photo-7688469.jpeg?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600"], "stock": {}},
+            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1509942774463-acf339cf87d5?w=600"], "stock": {}},
+            {"color": "Kongeblå", "color_hex": "#1D4ED8", "sizes": ["XS", "S", "M", "L", "XL", "XXL"], "images": ["https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 38, "width": 14, "height": 10, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "center_chest", "name_no": "Midt bryst", "x": 28, "y": 35, "width": 44, "height": 25, "max_width_cm": 30, "max_height_cm": 25},
-            {"name": "full_back", "name_no": "Rygg", "x": 22, "y": 25, "width": 56, "height": 45, "max_width_cm": 40, "max_height_cm": 40}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 32, "width": 16, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "center_chest", "name_no": "Midt bryst", "x": 26, "y": 28, "width": 48, "height": 28, "max_width_cm": 30, "max_height_cm": 25},
+            {"name": "full_back", "name_no": "Rygg", "x": 20, "y": 22, "width": 60, "height": 48, "max_width_cm": 40, "max_height_cm": 40}
         ],
         "materials": ["80% bomull, 20% polyester, 280g/m²"],
         "fit": "Regular",
@@ -249,14 +175,14 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 499.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/3066_04_f.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/3066_05_f.jpg"], "stock": {}},
-            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/02/3066_25_f.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600"], "stock": {}},
+            {"color": "Grå Melert", "color_hex": "#9CA3AF", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1578681994506-b8f463449011?w=600"], "stock": {}},
         ],
         "print_methods": ["print", "embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 35, "width": 14, "height": 10, "max_width_cm": 8, "max_height_cm": 8},
-            {"name": "full_back", "name_no": "Rygg", "x": 22, "y": 22, "width": 56, "height": 48, "max_width_cm": 40, "max_height_cm": 40}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 30, "width": 16, "height": 12, "max_width_cm": 8, "max_height_cm": 8},
+            {"name": "full_back", "name_no": "Rygg", "x": 20, "y": 20, "width": 60, "height": 50, "max_width_cm": 40, "max_height_cm": 40}
         ],
         "materials": ["80% bomull, 20% polyester, 280g/m²"],
         "fit": "Regular",
@@ -269,20 +195,19 @@ tracker_products = [
     
     # ==================== FLEECE ====================
     {
-        "name": "Tracker 4020 Original Ultrafleece Jacket",
+        "name": "Tracker 4020 Ultrafleece Jacket",
         "slug": "tracker-4020-ultrafleece-jacket",
         "description": "Lett og myk fleece jakke med full glidelås. Perfekt som mellomlag eller alene på milde dager.",
         "category": "hoodies",
         "brand": "Tracker",
         "base_price": 399.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/4020_04_f.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/4020_05_f.jpg"], "stock": {}},
-            {"color": "Mørk Grå", "color_hex": "#4B5563", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/4020_08_f.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1614975059251-992f11792f9a?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1578681041175-9717c16b0d7c?w=600"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 28, "width": 14, "height": 10, "max_width_cm": 8, "max_height_cm": 7},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 25, "width": 16, "height": 12, "max_width_cm": 8, "max_height_cm": 7},
         ],
         "materials": ["100% polyester fleece, 200g/m²"],
         "fit": "Regular",
@@ -300,12 +225,12 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 549.0,
         "variants": [
-            {"color": "Mørk Grå Melert", "color_hex": "#6B7280", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/4040_10.jpg"], "stock": {}},
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/12/4040_04.jpg"], "stock": {}},
+            {"color": "Mørk Grå Melert", "color_hex": "#6B7280", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1517940310602-26535839e6d8?w=600"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 30, "width": 14, "height": 10, "max_width_cm": 8, "max_height_cm": 7},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 28, "width": 16, "height": 12, "max_width_cm": 8, "max_height_cm": 7},
         ],
         "materials": ["100% polyester strikket fleece, 280g/m²"],
         "fit": "Regular",
@@ -318,50 +243,26 @@ tracker_products = [
     
     # ==================== JAKKER ====================
     {
-        "name": "Tracker 5040 Original Softshell Jacket",
+        "name": "Tracker 5040 Softshell Jacket",
         "slug": "tracker-5040-softshell-jacket",
         "description": "3-lags softshell jakke med vannavstøtende overflate og fleece-innside. Vindtett og pustende.",
         "category": "jackets",
         "brand": "Tracker",
         "base_price": 749.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/5040_04_f.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/5040_05_f.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.pexels.com/photos/3763234/pexels-photo-3763234.jpeg?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1544923246-77307dd628b5?w=600"], "stock": {}},
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 28, "width": 12, "height": 10, "max_width_cm": 8, "max_height_cm": 6},
-            {"name": "back", "name_no": "Rygg", "x": 25, "y": 22, "width": 50, "height": 40, "max_width_cm": 30, "max_height_cm": 25},
-            {"name": "sleeve", "name_no": "Erme", "x": 8, "y": 35, "width": 10, "height": 12, "max_width_cm": 5, "max_height_cm": 6}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 25, "width": 14, "height": 12, "max_width_cm": 8, "max_height_cm": 6},
+            {"name": "back", "name_no": "Rygg", "x": 22, "y": 20, "width": 56, "height": 45, "max_width_cm": 30, "max_height_cm": 25},
+            {"name": "sleeve", "name_no": "Erme", "x": 5, "y": 35, "width": 12, "height": 14, "max_width_cm": 5, "max_height_cm": 6}
         ],
         "materials": ["94% polyester, 6% elastan"],
         "fit": "Regular",
         "delivery_days": 7,
         "best_for": ["outdoor", "workwear", "team"],
-        "min_quantity": 1,
-        "featured": True,
-        "active": True
-    },
-    {
-        "name": "Tracker 7073 Hybrid Down Stretch Jacket",
-        "slug": "tracker-7073-hybrid-down-jacket",
-        "description": "Lett og varm hybrid dunjakke med stretch-sider. Perfekt for aktiv bruk i kaldt vær.",
-        "category": "jackets",
-        "brand": "Tracker",
-        "base_price": 1549.0,
-        "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2023/01/7073_04_f.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2023/01/7073_05_f.jpg"], "stock": {}},
-            {"color": "Mørk Grå", "color_hex": "#4B5563", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2023/01/7073_10_f.jpg"], "stock": {}},
-        ],
-        "print_methods": ["embroidery"],
-        "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 30, "width": 12, "height": 8, "max_width_cm": 7, "max_height_cm": 5},
-        ],
-        "materials": ["100% nylon, dun-/fjærfyll"],
-        "fit": "Regular",
-        "delivery_days": 10,
-        "best_for": ["outdoor", "ski", "premium"],
         "min_quantity": 1,
         "featured": True,
         "active": True
@@ -374,19 +275,19 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 1199.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/7050_04_f.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/7050_05_f.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["XS", "S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1548883354-94bcfe321cbb?w=600"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 28, "width": 12, "height": 8, "max_width_cm": 7, "max_height_cm": 5},
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 25, "width": 14, "height": 10, "max_width_cm": 7, "max_height_cm": 5},
         ],
         "materials": ["100% nylon, dun-/fjærfyll 90/10"],
         "fit": "Regular",
         "delivery_days": 10,
         "best_for": ["outdoor", "travel", "casual"],
         "min_quantity": 1,
-        "featured": False,
+        "featured": True,
         "active": True
     },
     
@@ -399,13 +300,13 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 149.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/6000_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["One Size"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/6000_05.jpg"], "stock": {}},
-            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["One Size"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/6000_00.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1534215754734-18e55d13e346?w=600"], "stock": {}},
+            {"color": "Hvit", "color_hex": "#FFFFFF", "sizes": ["One Size"], "images": ["https://images.pexels.com/photos/12025472/pexels-photo-12025472.jpeg?w=600"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 28, "y": 35, "width": 44, "height": 22, "max_width_cm": 10, "max_height_cm": 6},
+            {"name": "front", "name_no": "Front", "x": 25, "y": 30, "width": 50, "height": 28, "max_width_cm": 10, "max_height_cm": 6},
         ],
         "materials": ["100% bomull"],
         "fit": "Adjustable",
@@ -416,31 +317,6 @@ tracker_products = [
         "active": True
     },
     {
-        "name": "Tracker 6070 Winter Cap Fleece",
-        "slug": "tracker-6070-winter-cap-fleece",
-        "description": "Varm vintercaps med fleece-fôr og nedfellbare øreklaffer. Perfekt for kalde dager.",
-        "category": "caps",
-        "brand": "Tracker",
-        "base_price": 229.0,
-        "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["S/M", "L/XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/6070_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["S/M", "L/XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/6070_05.jpg"], "stock": {}},
-        ],
-        "print_methods": ["embroidery"],
-        "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 30, "y": 30, "width": 40, "height": 18, "max_width_cm": 9, "max_height_cm": 5},
-        ],
-        "materials": ["100% polyester med fleece-fôr"],
-        "fit": "S/M, L/XL",
-        "delivery_days": 7,
-        "best_for": ["outdoor", "workwear", "winter"],
-        "min_quantity": 10,
-        "featured": False,
-        "active": True
-    },
-    
-    # ==================== LUER ====================
-    {
         "name": "Tracker 6820 Original Beanie",
         "slug": "tracker-6820-original-beanie",
         "description": "Klassisk strikket lue i akryl med dobbel lag for ekstra varme.",
@@ -448,13 +324,13 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 119.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/6820_04.jpg"], "stock": {}},
-            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["One Size"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/6820_05.jpg"], "stock": {}},
-            {"color": "Grå", "color_hex": "#6B7280", "sizes": ["One Size"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/6820_10.jpg"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?w=600"], "stock": {}},
+            {"color": "Marine", "color_hex": "#1E3A5F", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1510598969022-c4c6c5d05769?w=600"], "stock": {}},
+            {"color": "Grå", "color_hex": "#6B7280", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1607672632458-9eb56696346b?w=600"], "stock": {}},
         ],
         "print_methods": ["embroidery"],
         "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 32, "y": 45, "width": 36, "height": 20, "max_width_cm": 8, "max_height_cm": 5},
+            {"name": "front", "name_no": "Front", "x": 30, "y": 35, "width": 40, "height": 25, "max_width_cm": 8, "max_height_cm": 5},
         ],
         "materials": ["100% akryl"],
         "fit": "One Size",
@@ -467,20 +343,44 @@ tracker_products = [
     
     # ==================== ARBEIDSKLÆR ====================
     {
-        "name": "Tracker 4013 Hi-Vis Microfleece Jacket",
-        "slug": "tracker-4013-hi-vis-microfleece-jacket",
+        "name": "Tracker 1213 Hi-Vis T-Shirt",
+        "slug": "tracker-1213-hi-vis-t-shirt",
+        "description": "Fluoriserende t-skjorte i synlighetsklasse 2 etter EN ISO20471. Teknisk materiale med god fuktavledning.",
+        "category": "workwear",
+        "brand": "Tracker",
+        "base_price": 199.0,
+        "variants": [
+            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600"], "stock": {}},
+            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1581092162384-8987c1d64926?w=600"], "stock": {}},
+        ],
+        "print_methods": ["print", "embroidery"],
+        "print_areas": [
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 22, "width": 16, "height": 12, "max_width_cm": 7, "max_height_cm": 6},
+            {"name": "back", "name_no": "Rygg", "x": 25, "y": 25, "width": 50, "height": 35, "max_width_cm": 25, "max_height_cm": 18},
+        ],
+        "materials": ["100% polyester, 135g/m²"],
+        "fit": "Regular",
+        "delivery_days": 7,
+        "best_for": ["workwear", "safety", "construction"],
+        "min_quantity": 1,
+        "featured": False,
+        "active": True
+    },
+    {
+        "name": "Tracker 4013 Hi-Vis Fleece Jacket",
+        "slug": "tracker-4013-hi-vis-fleece-jacket",
         "description": "Synlig fleece jakke i klasse 3 etter EN ISO20471. Varm og funksjonell arbeidsjakke.",
         "category": "workwear",
         "brand": "Tracker",
         "base_price": 649.0,
         "variants": [
-            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/4013_37.jpg"], "stock": {}},
-            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2020/07/4013_38.jpg"], "stock": {}},
+            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600"], "stock": {}},
+            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1581092162384-8987c1d64926?w=600"], "stock": {}},
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 25, "width": 12, "height": 10, "max_width_cm": 7, "max_height_cm": 5},
-            {"name": "back", "name_no": "Rygg", "x": 25, "y": 28, "width": 50, "height": 35, "max_width_cm": 30, "max_height_cm": 20}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 55, "y": 22, "width": 14, "height": 12, "max_width_cm": 7, "max_height_cm": 5},
+            {"name": "back", "name_no": "Rygg", "x": 22, "y": 25, "width": 56, "height": 38, "max_width_cm": 30, "max_height_cm": 20}
         ],
         "materials": ["100% polyester fleece"],
         "fit": "Regular",
@@ -498,13 +398,13 @@ tracker_products = [
         "brand": "Tracker",
         "base_price": 449.0,
         "variants": [
-            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/04/3013_37_f.jpg"], "stock": {}},
-            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://www.tracker.no/wp-content/uploads/2021/04/3013_38_f.jpg"], "stock": {}},
+            {"color": "Hi-Vis Gul", "color_hex": "#FACC15", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600"], "stock": {}},
+            {"color": "Hi-Vis Oransje", "color_hex": "#F97316", "sizes": ["S", "M", "L", "XL", "XXL", "3XL"], "images": ["https://images.unsplash.com/photo-1581092162384-8987c1d64926?w=600"], "stock": {}},
         ],
         "print_methods": ["embroidery", "print"],
         "print_areas": [
-            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 20, "width": 14, "height": 12, "max_width_cm": 7, "max_height_cm": 6},
-            {"name": "back", "name_no": "Rygg", "x": 25, "y": 25, "width": 50, "height": 35, "max_width_cm": 30, "max_height_cm": 20}
+            {"name": "left_chest", "name_no": "Venstre bryst", "x": 52, "y": 18, "width": 16, "height": 14, "max_width_cm": 7, "max_height_cm": 6},
+            {"name": "back", "name_no": "Rygg", "x": 22, "y": 22, "width": 56, "height": 40, "max_width_cm": 30, "max_height_cm": 20}
         ],
         "materials": ["80% bomull, 20% polyester, 280g/m²"],
         "fit": "Regular",
@@ -515,48 +415,27 @@ tracker_products = [
         "active": True
     },
     
-    # ==================== SEKKER ====================
+    # ==================== TILBEHØR ====================
     {
-        "name": "Tracker 9023 Hard Shell PC-Sekk",
-        "slug": "tracker-9023-hard-shell-pc-sekk",
-        "description": "Stilig PC-sekk med hardt ytterskall og to romslige rom. Laptop-lomme for opptil 15.6 tommer.",
+        "name": "Tracker Tote Bag",
+        "slug": "tracker-tote-bag",
+        "description": "Miljøvennlig bomullsbag med lange håndtak. Ideell for messe og event.",
         "category": "accessories",
         "brand": "Tracker",
-        "base_price": 899.0,
+        "base_price": 79.0,
         "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["https://www.tracker.no/wp-content/uploads/2025/01/9023_04_l.jpg"], "stock": {}},
-        ],
-        "print_methods": ["embroidery", "print"],
-        "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 35, "y": 35, "width": 30, "height": 18, "max_width_cm": 10, "max_height_cm": 5},
-        ],
-        "materials": ["100% polyester med hardt skall"],
-        "fit": "One Size",
-        "delivery_days": 10,
-        "best_for": ["business", "travel", "promo"],
-        "min_quantity": 1,
-        "featured": True,
-        "active": True
-    },
-    {
-        "name": "Tracker 9004 Waterproof Roller Bag 100L",
-        "slug": "tracker-9004-waterproof-roller-bag",
-        "description": "Vanntett trillebag på 100 liter. Sporty, robust og værbestandig for lange reiser.",
-        "category": "accessories",
-        "brand": "Tracker",
-        "base_price": 1899.0,
-        "variants": [
-            {"color": "Sort", "color_hex": "#000000", "sizes": ["100L"], "images": ["https://www.tracker.no/wp-content/uploads/2025/02/9004_04_2-1.jpg"], "stock": {}},
+            {"color": "Natur", "color_hex": "#F5F5DC", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1597633544424-4da83d50be55?w=600"], "stock": {}},
+            {"color": "Sort", "color_hex": "#000000", "sizes": ["One Size"], "images": ["https://images.unsplash.com/photo-1605518215813-6e3c7debd1fc?w=600"], "stock": {}},
         ],
         "print_methods": ["print"],
         "print_areas": [
-            {"name": "front", "name_no": "Front", "x": 30, "y": 30, "width": 40, "height": 25, "max_width_cm": 20, "max_height_cm": 12},
+            {"name": "front", "name_no": "Front", "x": 18, "y": 22, "width": 64, "height": 50, "max_width_cm": 28, "max_height_cm": 30}
         ],
-        "materials": ["Vanntett tarpaulin"],
-        "fit": "100L",
-        "delivery_days": 14,
-        "best_for": ["travel", "outdoor", "premium"],
-        "min_quantity": 1,
+        "materials": ["100% økologisk bomull"],
+        "fit": "One Size",
+        "delivery_days": 5,
+        "best_for": ["event", "promo", "eco"],
+        "min_quantity": 25,
         "featured": False,
         "active": True
     },
