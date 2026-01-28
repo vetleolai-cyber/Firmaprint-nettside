@@ -186,9 +186,10 @@ class Order(BaseModel):
     user_id: Optional[str] = None
     items: List[CartItem]
     shipping_address: ShippingAddress
-    payment_method: str  # stripe, invoice
+    payment_method: str  # stripe, vipps, invoice
     payment_status: str = "pending"
     stripe_session_id: Optional[str] = None
+    vipps_reference: Optional[str] = None
     subtotal: float
     design_total: float
     shipping_cost: float = 0
