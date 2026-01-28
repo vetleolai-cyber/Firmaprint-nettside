@@ -574,15 +574,22 @@ async def create_order(request: CreateOrderRequest, http_request: Request):
     order_count = await db.orders.count_documents({})
     order_number = f"FP{datetime.now().strftime('%Y%m')}{order_count + 1:04d}"
     
+    # Calculate shipping
+    subtotal = cart.get('subtotal', 0)
+    design_total = cart.get('design_total', 0)
+    shipping_cost = calculate_shipping(subtotal + design_total)
+    total = subtotal + design_total + shipping_cost
+    
     order = Order(
         order_number=order_number,
         user_id=cart.get('user_id'),
         items=[CartItem(**item) for item in cart['items']],
         shipping_address=request.shipping_address,
         payment_method=request.payment_method,
-        subtotal=cart['subtotal'],
-        design_total=cart['design_total'],
-        total=cart['total'],
+        subtotal=subtotal,
+        design_total=design_total,
+        shipping_cost=shipping_cost,
+        total=total,
         notes=request.notes
     )
     
@@ -598,7 +605,7 @@ async def create_order(request: CreateOrderRequest, http_request: Request):
         
         # Get origin from request headers
         origin = http_request.headers.get('origin', host_url)
-        success_url = f"{origin}/checkout/success?session_id={{CHECKOUT_SESSION_ID}}"
+        success_url = f"{origin}/checkout/success?session_id={{CHECKOUT_SESSION_ID}}&method=stripe"
         cancel_url = f"{origin}/checkout/cancel"
         
         checkout_request = CheckoutSessionRequest(
@@ -622,6 +629,7 @@ async def create_order(request: CreateOrderRequest, http_request: Request):
             'session_id': session.session_id,
             'amount': float(order.total),
             'currency': 'nok',
+            'payment_method': 'stripe',
             'payment_status': 'pending',
             'metadata': checkout_request.metadata,
             'created_at': datetime.now(timezone.utc).isoformat()
@@ -636,6 +644,84 @@ async def create_order(request: CreateOrderRequest, http_request: Request):
         
         return {"order": order_dict, "checkout_url": session.url}
     
+    elif request.payment_method == "vipps":
+        # Create Vipps payment
+        origin = http_request.headers.get('origin', str(http_request.base_url).rstrip('/'))
+        return_url = f"{origin}/checkout/success?order_id={order.id}&method=vipps"
+        
+        # Initiate Vipps payment
+        try:
+            access_token = await vipps_token_manager.get_access_token()
+            vipps_api_url = os.environ.get('VIPPS_API_URL', 'https://apitest.vipps.no')
+            vipps_subscription_key = os.environ.get('VIPPS_SUBSCRIPTION_KEY')
+            vipps_msn = os.environ.get('VIPPS_MSN')
+            
+            reference = f"fp-{order_number}-{uuid.uuid4().hex[:6]}"
+            
+            payment_payload = {
+                "amount": {
+                    "currency": "NOK",
+                    "value": int(order.total * 100)  # Convert to øre
+                },
+                "paymentMethod": {
+                    "type": "WALLET"
+                },
+                "reference": reference,
+                "returnUrl": return_url,
+                "userFlow": "WEB_REDIRECT",
+                "paymentDescription": f"Firmaprint ordre {order_number}"
+            }
+            
+            async with httpx.AsyncClient() as client:
+                response = await client.post(
+                    f"{vipps_api_url}/epayment/v1/payments",
+                    json=payment_payload,
+                    headers={
+                        "Content-Type": "application/json",
+                        "Authorization": f"Bearer {access_token}",
+                        "Ocp-Apim-Subscription-Key": vipps_subscription_key,
+                        "Merchant-Serial-Number": vipps_msn,
+                        "Idempotency-Key": str(uuid.uuid4()),
+                        "Vipps-System-Name": "Firmaprint",
+                        "Vipps-System-Version": "1.0.0",
+                    },
+                )
+                
+                if response.status_code != 201:
+                    logger.error(f"Vipps error: {response.text}")
+                    raise HTTPException(status_code=400, detail="Kunne ikke opprette Vipps-betaling")
+                
+                payment_data = response.json()
+            
+            order.vipps_reference = reference
+            
+            # Save payment transaction
+            await db.payment_transactions.insert_one({
+                'id': str(uuid.uuid4()),
+                'order_id': order.id,
+                'reference': reference,
+                'amount': int(order.total * 100),
+                'currency': 'NOK',
+                'payment_method': 'vipps',
+                'payment_status': 'CREATED',
+                'created_at': datetime.now(timezone.utc).isoformat()
+            })
+            
+            # Save order
+            order_dict = order.model_dump()
+            await db.orders.insert_one(order_dict)
+            
+            # Clear cart
+            await db.carts.delete_one({'session_id': request.cart_session_id})
+            
+            return {"order": order_dict, "checkout_url": payment_data["redirectUrl"]}
+            
+        except HTTPException:
+            raise
+        except Exception as e:
+            logger.error(f"Vipps error: {e}")
+            raise HTTPException(status_code=500, detail="Vipps-betaling feilet")
+    
     else:  # Invoice
         order.payment_status = "awaiting_invoice"
         order.status = "awaiting_payment"
@@ -647,6 +733,7 @@ async def create_order(request: CreateOrderRequest, http_request: Request):
         await db.carts.delete_one({'session_id': request.cart_session_id})
         
         return {"order": order_dict}
+
 
 @api_router.get("/orders/{order_id}")
 async def get_order(order_id: str):
