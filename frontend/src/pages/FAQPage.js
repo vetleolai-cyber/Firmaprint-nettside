@@ -75,7 +75,7 @@ const faqCategories = [
       },
       {
         q: 'Er brodyrte plagg vaskbare?',
-        a: 'Ja! Brodyr er svært holdbart og tåler vanlig maskinvask. Vi anbefaler vask på 40-60°C avhengig av plaggtype.'
+        a: 'Ja! Brodering er svært holdbart og tåler vanlig maskinvask. Vi anbefaler vask på 40-60°C avhengig av plaggtype.'
       },
       {
         q: 'Hvor lenge holder trykket?',
