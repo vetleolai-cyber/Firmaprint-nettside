@@ -23,7 +23,7 @@ const recommendations = [
   },
   {
     product: 'Polo/Skjorter',
-    recommendation: 'Brodyr',
+    recommendation: 'Brodering',
     reason: 'Premium følelse, holder seg pent over tid, profesjonelt utseende.',
     icon: '👔'
   },
@@ -35,19 +35,19 @@ const recommendations = [
   },
   {
     product: 'Caps',
-    recommendation: 'Brodyr',
+    recommendation: 'Brodering',
     reason: 'Standard for caps, holder seg best på buet overflate.',
     icon: '🧢'
   },
   {
     product: 'Jakker',
-    recommendation: 'Brodyr',
+    recommendation: 'Brodering',
     reason: 'Tåler vær og vind, premium utseende.',
     icon: '🧥'
   },
   {
     product: 'Arbeidsklær',
-    recommendation: 'Brodyr',
+    recommendation: 'Brodering',
     reason: 'Svært holdbart, tåler industrivask og tøff bruk.',
     icon: '👷'
   },
@@ -60,7 +60,7 @@ export const PrintVsEmbroideryPage = () => {
       <section className="bg-gradient-to-br from-slate-50 to-slate-100 py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4 md:px-8 text-center">
           <h1 className="font-manrope text-3xl md:text-5xl font-bold text-slate-900" data-testid="print-vs-embroidery-title">
-            Brodyr vs Trykk
+            Brodering vs Trykk
           </h1>
           <p className="mt-6 text-lg text-slate-600 max-w-2xl mx-auto">
             Lurer du på hvilken dekorasjonsmetode som passer best for dine profilklær? Vi hjelper deg med å velge riktig.
@@ -82,7 +82,7 @@ export const PrintVsEmbroideryPage = () => {
                   <Sparkles className="w-8 h-8 text-blue-600" />
                 </div>
                 <div>
-                  <h2 className="font-manrope text-2xl font-bold text-slate-900">Brodyr</h2>
+                  <h2 className="font-manrope text-2xl font-bold text-slate-900">Brodering</h2>
                   <p className="text-slate-600">Brodert logo med tråd</p>
                 </div>
               </div>
@@ -178,7 +178,7 @@ export const PrintVsEmbroideryPage = () => {
               <thead className="bg-slate-100">
                 <tr>
                   <th className="text-left p-4 font-semibold text-slate-900">Egenskap</th>
-                  <th className="text-left p-4 font-semibold text-blue-600">Brodyr</th>
+                  <th className="text-left p-4 font-semibold text-blue-600">Brodering</th>
                   <th className="text-left p-4 font-semibold text-slate-700">Trykk</th>
                 </tr>
               </thead>
@@ -214,7 +214,7 @@ export const PrintVsEmbroideryPage = () => {
                   <div>
                     <h3 className="font-semibold text-slate-900">{rec.product}</h3>
                     <span className={`text-sm font-medium ${
-                      rec.recommendation === 'Brodyr' ? 'text-blue-600' :
+                      rec.recommendation === 'Brodering' ? 'text-blue-600' :
                       rec.recommendation === 'Trykk' ? 'text-slate-600' :
                       'text-purple-600'
                     }`}>
