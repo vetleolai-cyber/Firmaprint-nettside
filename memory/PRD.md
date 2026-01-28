@@ -87,7 +87,8 @@ Norsk nettbutikk for profilklær med logo (Firmaprint.no) med fokus på broderin
 - [ ] Export til print-ready PDF
 
 ## Next Tasks
-1. Test Stripe checkout flow end-to-end
-2. Implement order confirmation page
-3. Add logo preview to cart items
-4. Connect AI image generation for mockups
+1. Implement full drag-and-drop for logo placement in customizer
+2. Implement logo file upload functionality
+3. Test Stripe checkout flow end-to-end
+4. Implement order confirmation page
+5. Add logo preview to cart items
